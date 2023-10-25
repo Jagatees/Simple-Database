@@ -35,22 +35,29 @@ void printlist(node_t *head) {
 }
 
 
+node_t *create_new_node(int value) {
+    node_t *result = malloc(sizeof(node_t));
+    result->value = value;
+    result->next = NULL;
+    return result;
+}
+
+
 
 int main(int argc, const char * argv[]) {
     
-    node_t n1,n2,n3;
-    node_t *head;
+    node_t *head = NULL;
+    node_t *tmp;
     
-    n1.value = 1;
-    n2.value = 2;
-    n3.value = 3;
+    for (int i = 0; i < 25; i++) {
+        tmp = create_new_node(i);
+        tmp->next = head;
+        head = tmp;
+    }
+   
     
-    head = &n2;
-    
-    n1.next = &n3;
-    n2.next = &n1;
-    n3.next = NULL;
-    
+   
+
   
     printlist(head);
     
