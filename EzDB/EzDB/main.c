@@ -43,7 +43,7 @@ int main(int argc, const char * argv[]) {
     char *inv[MAX_USER_INPUT];
     
     
-    printf("Welcome to EzDB");
+    printf("Welcome to EzDB\n");
     
     do {
         // Display Text Message

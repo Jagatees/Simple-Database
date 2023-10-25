@@ -13,5 +13,8 @@
 
 #endif /* database_h */
 
+#define MAX_USER_INPUT 256
+
+
 
 int init_databse(char *inv[], int inc);
