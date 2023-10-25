@@ -8,6 +8,7 @@
 // C Libary
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 // My Lib
 #include "database.h"
@@ -37,15 +38,28 @@ int main(int argc, const char * argv[]) {
     // max number of string a user can enter in the line
     char user_input[MAX_USER_INPUT];
     int inDatabase = 0;
+    // rename this variable
     int inc = 0;
     char *inv[MAX_USER_INPUT];
     
     
+    printf("Welcome to EzDB");
+    
     do {
         // Display Text Message
-        printf("How may i help u .\n");
+        printf("Enter Query :");
         // Get a string os user input
         fgets(user_input, MAX_USER_INPUT, stdin);
+        
+        
+        // conver to upper case
+        for (int i = 0; user_input[i]; i++) {
+            user_input[i] = toupper((unsigned char)user_input[i]);
+        }
+        
+        printf("Uppercase: %s", user_input);
+
+        
         // still not sure it like remove stuff from the string and store in inv[0] ?
         inc = 0;
         inv[inc] = strtok(user_input, characters);

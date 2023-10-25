@@ -14,9 +14,11 @@ int init_databse(char *inv[], int inc){
     if (inv[0] == NULL){
         printf("Enter Nothing. Bye Bye .\n");
         return 1;
-    }else{
-        printf("Do Logic .\n");
-        return 0;
+    }
+    
+    
+    if (strcmp(inv[0], "Exit")){
+        
     }
     
     return 0;
