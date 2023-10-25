@@ -5,9 +5,12 @@
 //  Created by Jagateesvaran on 24/10/23.
 //
 
-
+// C Libary
 #include <stdio.h>
+#include <string.h>
 
+// My Lib
+#include "database.h"
 
 /*
  * Get the name of the chatbot.
@@ -17,6 +20,7 @@
 
 
 #define MAX_USER_INPUT 256
+const char *characters = " ?\t\n";
 
 
 // Get user input
@@ -29,26 +33,36 @@
 
 int main(int argc, const char * argv[]) {
     
-    
+    // Get user input , 
+    // max number of string a user can enter in the line
     char user_input[MAX_USER_INPUT];
     int inDatabase = 0;
+    int inc = 0;
+    char *inv[MAX_USER_INPUT];
     
-    /* print a welcome message */
-    
-    printf("Welcome to Hakari Dance Database .\n");
-
     
     do {
-        
-        printf("Enter Somthing :");
-        // fgets get mutiple string in a 
+        // Display Text Message
+        printf("How may i help u .\n");
+        // Get a string os user input
         fgets(user_input, MAX_USER_INPUT, stdin);
-        printf("What user entered %s", user_input);
+        // still not sure it like remove stuff from the string and store in inv[0] ?
+        inc = 0;
+        inv[inc] = strtok(user_input, characters);
 
-    
-        inDatabase = 1; // 1 == break loop , 0 == keep looping
+        // Split String
+        // Place a NULL as a last value
+        // break from there
+        while (inv[inc] != NULL) {
+            inc++;
+            inv[inc] = strtok(NULL, characters);
+        }
+        
+        inDatabase =  init_databse(inv, inc);
+        // 1 == break loop , 0 = keep looping
     } while (!inDatabase);
-    
+   
+        
     
     return 0;
 }
