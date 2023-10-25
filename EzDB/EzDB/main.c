@@ -58,24 +58,7 @@ int main(int argc, const char * argv[]) {
         
     } while (!inDatabase);
    
-        
-    
     return 0;
 }
 
 
-void show_all_instruction(void){
-    
-}
-void insert_instruction(void){
-    
-}
-void query_instruciton(void){
-    
-}
-void update_instruciton(void){
-    
-}
-void delete_instruciton(void){
-    
-}

@@ -77,10 +77,24 @@ int logic_databse(char *inv[], int inc){
     
     return 0;
     
-    
-    
- 
 }
+
+void show_all_instruction(void){
+    
+}
+void insert_instruction(void){
+    
+}
+void query_instruciton(void){
+    
+}
+void update_instruciton(void){
+    
+}
+void delete_instruciton(void){
+    
+}
+
 
 
 
