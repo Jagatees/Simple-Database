@@ -7,23 +7,11 @@
 
 // C Libary
 #include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <string.h>
 
-// My Lib
-#include "database.h"
 #include "utility.h"
-
-
-
-// Work?
-// Get user input
-// check is it is empty first
-// check what is the intent
-// send to the write function to handle the write intent
-// if not then return false say wrong entry
-// user enter exit can exit the databse
-// 1 = keep looping , 0 stop looping
+#include "database.h"
 
 int main(int argc, const char * argv[]) {
     
@@ -66,11 +54,28 @@ int main(int argc, const char * argv[]) {
         }
         
         // retturn (1 == break loop , 0 = keep looping)
-        inDatabase =  logic_databse(inv, inc);
+        inDatabase = logic_databse(inv, inc);
         
     } while (!inDatabase);
    
         
     
     return 0;
+}
+
+
+void show_all_instruction(void){
+    
+}
+void insert_instruction(void){
+    
+}
+void query_instruciton(void){
+    
+}
+void update_instruciton(void){
+    
+}
+void delete_instruciton(void){
+    
 }

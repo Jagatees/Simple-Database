@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B9757B702AE8E94A007D5FC6 /* database.c in Sources */ = {isa = PBXBuildFile; fileRef = B9757B6F2AE8E94A007D5FC6 /* database.c */; };
+		B9757BA62AE93F88007D5FC6 /* utility.h in Sources */ = {isa = PBXBuildFile; fileRef = B9757B742AE9133D007D5FC6 /* utility.h */; };
+		B9757BA72AE93F8B007D5FC6 /* database.h in Sources */ = {isa = PBXBuildFile; fileRef = B9757B6E2AE8E94A007D5FC6 /* database.h */; };
 		B9C4EAE82AE74BA800B51913 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B9C4EAE72AE74BA800B51913 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9757BA72AE93F8B007D5FC6 /* database.h in Sources */,
+				B9757BA62AE93F88007D5FC6 /* utility.h in Sources */,
 				B9757B702AE8E94A007D5FC6 /* database.c in Sources */,
 				B9C4EAE82AE74BA800B51913 /* main.c in Sources */,
 			);
@@ -191,6 +195,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lc";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -245,6 +250,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-lc";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -253,6 +259,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -261,6 +268,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
