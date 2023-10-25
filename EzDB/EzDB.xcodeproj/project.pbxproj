@@ -26,6 +26,7 @@
 /* Begin PBXFileReference section */
 		B9757B6E2AE8E94A007D5FC6 /* database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
 		B9757B6F2AE8E94A007D5FC6 /* database.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = database.c; sourceTree = "<group>"; };
+		B9757B742AE9133D007D5FC6 /* utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
 		B9C4EAE42AE74BA800B51913 /* EzDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EzDB; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C4EAE72AE74BA800B51913 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +61,7 @@
 		B9C4EAE62AE74BA800B51913 /* EzDB */ = {
 			isa = PBXGroup;
 			children = (
+				B9757B742AE9133D007D5FC6 /* utility.h */,
 				B9C4EAE72AE74BA800B51913 /* main.c */,
 				B9757B6E2AE8E94A007D5FC6 /* database.h */,
 				B9757B6F2AE8E94A007D5FC6 /* database.c */,

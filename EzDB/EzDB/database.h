@@ -13,8 +13,33 @@
 
 #endif /* database_h */
 
-#define MAX_USER_INPUT 256
+
+// Instruction strut
+struct Instruction {
+    const char* SHOW;
+    const char* INSERT;
+    const char* QUERY;
+    const char* UPDATE;
+    const char* DELETE;
+    const char* ALL;
+};
+
+struct Instruction db_instruction = {
+    .SHOW = "SHOW",
+    .ALL = "ALL",
+    .INSERT = "INSERT",
+    .QUERY = "QUERY",
+    .UPDATE = "UPDATE",
+    .DELETE = "DELETE"
+};
 
 
+// Logic of Database
+int logic_databse(char *inv[], int inc);
 
-int init_databse(char *inv[], int inc);
+// Instruction Function
+void show_all_instruction(void);
+void insert_instruction(void);
+void query_instruciton(void);
+void update_instruciton(void);
+void delete_instruciton(void);

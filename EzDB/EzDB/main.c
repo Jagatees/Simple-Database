@@ -12,18 +12,11 @@
 
 // My Lib
 #include "database.h"
-
-/*
- * Get the name of the chatbot.
- *
- * Returns: the name of the chatbot as a null-terminated string
- */
+#include "utility.h"
 
 
-#define MAX_USER_INPUT 256
-const char *characters = " ?\t\n";
 
-
+// Work?
 // Get user input
 // check is it is empty first
 // check what is the intent
@@ -72,8 +65,9 @@ int main(int argc, const char * argv[]) {
             inv[inc] = strtok(NULL, characters);
         }
         
-        inDatabase =  init_databse(inv, inc);
-        // 1 == break loop , 0 = keep looping
+        // retturn (1 == break loop , 0 = keep looping)
+        inDatabase =  logic_databse(inv, inc);
+        
     } while (!inDatabase);
    
         
