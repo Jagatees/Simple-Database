@@ -22,7 +22,14 @@ struct node {
 
 typedef struct node node_t;
 
+//SHOW ALL: to show all the current records. (Done)
+//• INSERT: to add a new record to the database. (Done)
+//• QUERY: to search for a record in the database. (Done)
+//• UPDATE: to update the value for a given record. (PENDIND) (2 arg the query function)
+//• DELETE: to delete a record from the database. (Done)
 
+
+// Show All - (Print)
 void printlist(node_t *head) {
     node_t *temporary = head;
     
@@ -35,11 +42,56 @@ void printlist(node_t *head) {
 }
 
 
+// Create A New Node
 node_t *create_new_node(int value) {
     node_t *result = malloc(sizeof(node_t));
     result->value = value;
     result->next = NULL;
     return result;
+}
+
+// Insert
+node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
+    node_to_insert->next = *head;
+    *head = node_to_insert;
+    return node_to_insert;
+}
+
+// Search Query
+node_t *find_node(node_t *head, int value) {
+    node_t *tmp = head;
+    while (tmp != NULL) {
+        if (tmp->value == value) {
+            return tmp;
+        }
+        tmp = tmp->next;
+    }
+    return NULL;
+}
+
+// delete node
+void delete_node(node_t **head, int index) {
+    node_t *previous = *head;
+    node_t *current = *head;
+    
+    if (*head == NULL){
+        printf("list is already empty");
+    }
+    else if(index == 1){
+        *head = current->next;
+        free(current);
+        current = NULL;
+    }
+    else {
+        while (index !=  1) {
+            previous = current;
+            current = current->next;
+            index--;
+        }
+        previous->next = current->next;
+        free(current);
+        current = NULL;
+    }
 }
 
 
@@ -49,17 +101,22 @@ int main(int argc, const char * argv[]) {
     node_t *head = NULL;
     node_t *tmp;
     
-    for (int i = 0; i < 25; i++) {
+    for (int i = 0; i < 15; i++) {
         tmp = create_new_node(i);
-        tmp->next = head;
-        head = tmp;
+        head = insert_at_head(&head, tmp);
     }
-   
     
-   
-
-  
+    
+    tmp = find_node(head, 13);
+    printf("Found Number : %d\n", tmp->value);
+    
     printlist(head);
+    
+    // Index Zero , give error
+    delete_node(&head, 1);
+
+    printlist(head);
+
     
     
     
