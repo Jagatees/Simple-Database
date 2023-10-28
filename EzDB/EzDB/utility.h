@@ -24,7 +24,6 @@ char *rtrim(char *s)
     return s;
 }
 
-
 node_t* printFileContents(const char *filename) {
     node_t *head = NULL;
     node_t *tmp;
@@ -39,7 +38,6 @@ node_t* printFileContents(const char *filename) {
     fgets(line, sizeof(line), file);
 
     while (fgets(line, sizeof(line), file)) {
-        
         char *key = strtok(line, "\t");
         char *value = strtok(NULL, "\t");
         
