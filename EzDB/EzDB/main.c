@@ -77,25 +77,6 @@ int main(int argc, const char * argv[]) {
     } while (!inDatabase);
     
     
-    
-    
-    
-    
-//    tmp = find_node(head, 13);
-//    printf("Found Number : %d\n", tmp->value);
-//    
-//    printlist(head);
-//    
-//    // Index Zero , give error
-//    delete_node(&head, 1);
-//
-//    printlist(head);
-//
-//    update_node(head, 4, 400);
-//    printlist(head);
-
-    
-    
     return 0;
 }
 

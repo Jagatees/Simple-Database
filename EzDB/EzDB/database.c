@@ -65,18 +65,15 @@ int logic_databse(char *inv[], int inc, node_t **head){
     else if (strcmp(inv[0], db_instruction.QUERY) == 0) // QUERY INSTRUCTION
     {
         printf("Welcome to QUERY Instruction\n");
+
         
-//        To search if there is any existing record with the
-//        Key=Mango.
-//        If the record exists, EzDB will prompt:
-//        • “A record of Key=Mango, Value=6.5 is found
-//        in the database.”
-//        If there is no record found, EzDB will prompt:
-//        • “There is no
+        int isfound = find_node(*head, inv[1]);
         
-        query_instruciton();
-        
-        
+        if (isfound == 1) {
+            printf("A record of Key=%s, Value= {missing value} is found in the database.\n", inv[1]);
+        } else if (isfound == 0){
+            printf("There is no record with Key=%s found in the database\n", inv[1]);
+        }
         
         
         return 0;
@@ -84,6 +81,16 @@ int logic_databse(char *inv[], int inc, node_t **head){
     else if (strcmp(inv[0], db_instruction.UPDATE) == 0) // UPDATE INSTRUCTION
     {
         printf("Welcome to UPDATE Instruction\n");
+        
+        int isfound = find_node(*head, inv[1]);
+        
+        if (isfound == 1) {
+            update_node(*head, inv[1], inv[2]);
+            printf("The value for the record of Key=%s is successfully updated.\n", inv[1]);
+        } else if (isfound == 0){
+            printf("There is no record with Key=%s found in the database.\n", inv[1]);
+        }
+        
         return 0;
     }
     else if (strcmp(inv[0], db_instruction.DELETE) == 0) // DELETE INSTRUCTION

@@ -39,11 +39,6 @@ void printlist(node_t *head) {
     }
 }
 
-
-
-//  DONE FUNCTION
-
-
 // Search Query
 int find_node(node_t *head, char *key) {
     node_t *tmp = head;
@@ -55,6 +50,11 @@ int find_node(node_t *head, char *key) {
     }
     return 0;
 }
+
+//  DONE FUNCTION ////////////////////////////////////////////////////////////
+
+
+
 
 // delete node
 void delete_node(node_t **head, int index) {
@@ -82,13 +82,16 @@ void delete_node(node_t **head, int index) {
 }
 
 // UPDATE
-//void update_node(node_t *head, int value, int newValue) {
-//    node_t *tmp = head;
-//    while (tmp != NULL) {
-//        if (tmp->value == value) {
-//            tmp->value = newValue;
-//            break;
-//        }
-//        tmp = tmp->next;
-//    }
-//}
+int update_node(node_t *head, char *key, char *newvalue) {
+    node_t *tmp = head;
+    while (tmp != NULL) {
+        if (strcmp(tmp->key, key) == 0) {
+            printf("Updated key \"%s\" with new value \n", tmp->value);
+            strcpy(tmp->value, newvalue);
+            printf("Updated key \"%s\" with new value \n", tmp->value);
+            return 1;
+        }
+        tmp = tmp->next;
+    }
+    return 0;
+}
