@@ -7,9 +7,6 @@
 
 #include "j_node.h"
 
-
-
-
 // CREATE A NODE
 node_t *create_new_node(char *key, char *value) {
     node_t *result = malloc(sizeof(node_t));
@@ -63,7 +60,7 @@ void delete_node(node_t **head, char *keys) {
         return;
     }
         
-        // Search for the node to be deleted
+    // Search for the node to be deleted
     while(current != NULL && strcmp(current->key, keys) != 0) {
         previous = current;
         current = current->next;

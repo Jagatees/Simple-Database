@@ -103,25 +103,19 @@ int logic_databse(char *inv[], int inc, node_t **head){
         delete_node(head, inv[1]);
         return 0;
     }
+    else if (strcmp(inv[0], db_instruction.DELETE) == 0) // DELETE INSTRUCTION
+    {
+        printf("Welcome to DELETE Instruction\n");
+        delete_node(head, inv[1]);
+        return 0;
+    }
     else {
         printf("I don't understand this command %s\n", inv[0]);
         return 0;
     }
 
-    
-    
-    
+
     
     return 0;
     
 }
-
-void show_all_instruction(void){}
-void insert_instruction(void){}
-void query_instruciton(void){}
-void update_instruciton(void){}
-void delete_instruciton(void){}
-
-
-
-
