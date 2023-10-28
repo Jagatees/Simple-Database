@@ -7,8 +7,6 @@
 
 #include "database.h"
 
-
-// Instruction strut
 struct DB {
     const char* SHOW;
     const char* INSERT;
@@ -19,6 +17,7 @@ struct DB {
     const char* OPEN;
     const char* SAVE;
     const char* EXIT;
+    const char* HELP;
 };
 
 struct DB db_instruction = {
@@ -31,14 +30,13 @@ struct DB db_instruction = {
     .OPEN = "OPEN",
     .SAVE = "SAVE",
     .EXIT = "EXIT",
+    .HELP = "HELP",
 };
 
 
 
 // inv is the list of user input string and inc is the counter length
-int logic_databse(char *inv[], int inc, node_t **head){
-
-    
+int logic_databse(char *inv[], int inc, node_t **head){    
     if (inv[0] == NULL) {
         printf("U Enter Nothing So we are kicking u out .\n");
         return 1;
@@ -129,13 +127,16 @@ int logic_databse(char *inv[], int inc, node_t **head){
         printf("Disconnected from J_Database...\n");
         return 1;
     }
+    else if (strcmp(inv[0], db_instruction.HELP) == 0) // DELETE INSTRUCTION
+    {
+        printf("--------------INSTRUCTION LIST--------------\nSHOW ALL \t\t\t : PRINT OUT TABLE\nINSERT [Key] [Value] : Insert Into Table\nQuery [Key] \t\t : Display Data from table\nUPDATE [Key] [Value] : Update a value in the table\nDELETE [Key] \t\t : remove key from table\nOPEN [filename.txt]  : load data from file into cache\nSAVE [filename.txt]  : save data from cache into .txt\n");
+        return 0;
+    }
     else {
         printf("I don't understand this command %s\n", inv[0]);
         return 0;
     }
 
-
-    
     return 0;
     
 }

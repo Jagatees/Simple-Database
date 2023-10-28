@@ -32,10 +32,13 @@ int main(int argc, const char *argv[])
 
     do
     {
+        printf("\n");
         // Display Text Message
-        printf("Enter Query :");
+        printf("Enter INSTRUCTION :");
         // Get a string os user input
         fgets(user_input, MAX_USER_INPUT, stdin);
+       
+
 
         // still not sure it like remove stuff from the string and store in inv[0] ?
         inc = 0;
