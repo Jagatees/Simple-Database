@@ -51,34 +51,33 @@ int find_node(node_t *head, char *key) {
     return 0;
 }
 
-//  DONE FUNCTION ////////////////////////////////////////////////////////////
-
-
-
-
 // delete node
-void delete_node(node_t **head, int index) {
+void delete_node(node_t **head, char *keys) {
     node_t *previous = *head;
     node_t *current = *head;
     
-    if (*head == NULL){
-        printf("list is already empty");
-    }
-    else if(index == 1){
+    // Check if the head node is the one to be deleted
+    if(strcmp(current->key, keys) == 0){
         *head = current->next;
         free(current);
-        current = NULL;
+        return;
     }
-    else {
-        while (index !=  1) {
-            previous = current;
-            current = current->next;
-            index--;
-        }
-        previous->next = current->next;
-        free(current);
-        current = NULL;
+        
+        // Search for the node to be deleted
+    while(current != NULL && strcmp(current->key, keys) != 0) {
+        previous = current;
+        current = current->next;
     }
+
+    // If the key wasn't found in the list
+    if(current == NULL) {
+        printf("Key not found in the list\n");
+        return;
+    }
+
+    // Delete the node
+    previous->next = current->next;
+    free(current);
 }
 
 // UPDATE

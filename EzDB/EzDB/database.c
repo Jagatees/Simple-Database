@@ -96,6 +96,7 @@ int logic_databse(char *inv[], int inc, node_t **head){
     else if (strcmp(inv[0], db_instruction.DELETE) == 0) // DELETE INSTRUCTION
     {
         printf("Welcome to DELETE Instruction\n");
+        delete_node(head, inv[1]);
         return 0;
     }
     else {

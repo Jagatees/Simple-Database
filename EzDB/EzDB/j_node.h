@@ -34,7 +34,7 @@ void printlist(node_t *head);
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
 
 // delete node
-void delete_node(node_t **head, int index);
+void delete_node(node_t **head, char *keys);
 
 
 // UPDATE
