@@ -109,6 +109,8 @@ int logic_databse(char *inv[], int inc, node_t **head){
     else if (strcmp(inv[0], db_instruction.OPEN) == 0) // DELETE INSTRUCTION
     {
         printf("Welcome to OPEN from database Instruction\n");
+        const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/test2.txt";
+       printFileContents(database_file, head);
 
         return 0;
     }
@@ -132,4 +134,41 @@ int logic_databse(char *inv[], int inc, node_t **head){
     
     return 0;
     
+}
+
+
+char *rtrim(char *s)
+{
+    char* back = s + strlen(s);
+    while(isspace(*--back));
+    *(back+1) = '\0';
+    return s;
+}
+
+node_t* printFileContents(const char *filename, node_t **mainHead) {
+    node_t *head = NULL;
+    node_t *tmp;
+    FILE *file = fopen(filename, "r");
+    
+    if (!file) {
+        perror("Error opening file");
+        return NULL;
+    }
+ 
+    char line[1024];
+    fgets(line, sizeof(line), file);
+
+    while (fgets(line, sizeof(line), file)) {
+        char *key = strtok(line, "\t");
+        char *value = strtok(NULL, "\t");
+        
+        if (key && value) {
+            tmp = create_new_node(rtrim(key), rtrim(value));
+            head = insert_at_head(&head, tmp);
+            *mainHead = head;
+        }
+    }
+
+    fclose(file);
+    return head;
 }

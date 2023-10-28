@@ -22,21 +22,11 @@ struct node {
 
 typedef struct node node_t;
 
-// Create A New Node
 node_t *create_new_node(char *key, char *value);
-
-// Find Key Node
 int find_node(node_t *head, char *key);
-
-// Show All - (Print)
 void printlist(node_t *head);
-// Insert
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
-
-// delete node
 void delete_node(node_t **head, char *keys);
-
-// 
 int update_node(node_t *head, char *key, char *newvalue);
 
 #endif /* j_node_h */

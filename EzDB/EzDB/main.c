@@ -18,10 +18,8 @@
 int main(int argc, const char *argv[])
 {
     
-    // CHANGE SO IT WILL READ FROM INTERNAL DIR
-    const char *filename = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/table.txt";
-    node_t *head = printFileContents(filename);
-
+    node_t *head = NULL;
+    
     // Get user input ,
     // max number of string a user can enter in the line
     char user_input[MAX_USER_INPUT];
