@@ -10,9 +10,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "j_node.h"
 
 // Logic of Database
-int logic_databse(char *inv[], int inc);
+int logic_databse(char *inv[], int inc, node_t **head);
 
 // Instruction Function
 void show_all_instruction(void);

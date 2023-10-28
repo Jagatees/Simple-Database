@@ -10,6 +10,7 @@
 		B9757B702AE8E94A007D5FC6 /* database.c in Sources */ = {isa = PBXBuildFile; fileRef = B9757B6F2AE8E94A007D5FC6 /* database.c */; };
 		B9757BA62AE93F88007D5FC6 /* utility.h in Sources */ = {isa = PBXBuildFile; fileRef = B9757B742AE9133D007D5FC6 /* utility.h */; };
 		B9757BA72AE93F8B007D5FC6 /* database.h in Sources */ = {isa = PBXBuildFile; fileRef = B9757B6E2AE8E94A007D5FC6 /* database.h */; };
+		B9BBE6262AECC0E300115D3E /* j_node.c in Sources */ = {isa = PBXBuildFile; fileRef = B9BBE6252AECC0E300115D3E /* j_node.c */; };
 		B9C4EAE82AE74BA800B51913 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B9C4EAE72AE74BA800B51913 /* main.c */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,8 @@
 		B9757B6E2AE8E94A007D5FC6 /* database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
 		B9757B6F2AE8E94A007D5FC6 /* database.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = database.c; sourceTree = "<group>"; };
 		B9757B742AE9133D007D5FC6 /* utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		B9BBE6242AECC0E300115D3E /* j_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = j_node.h; sourceTree = "<group>"; };
+		B9BBE6252AECC0E300115D3E /* j_node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = j_node.c; sourceTree = "<group>"; };
 		B9C4EAE42AE74BA800B51913 /* EzDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EzDB; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C4EAE72AE74BA800B51913 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +70,8 @@
 				B9C4EAE72AE74BA800B51913 /* main.c */,
 				B9757B6E2AE8E94A007D5FC6 /* database.h */,
 				B9757B6F2AE8E94A007D5FC6 /* database.c */,
+				B9BBE6242AECC0E300115D3E /* j_node.h */,
+				B9BBE6252AECC0E300115D3E /* j_node.c */,
 			);
 			path = EzDB;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				B9757BA72AE93F8B007D5FC6 /* database.h in Sources */,
 				B9757BA62AE93F88007D5FC6 /* utility.h in Sources */,
 				B9757B702AE8E94A007D5FC6 /* database.c in Sources */,
+				B9BBE6262AECC0E300115D3E /* j_node.c in Sources */,
 				B9C4EAE82AE74BA800B51913 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

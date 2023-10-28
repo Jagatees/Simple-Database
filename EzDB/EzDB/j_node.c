@@ -1,0 +1,94 @@
+//
+//  j_node.c
+//  EzDB
+//
+//  Created by Jagateesvaran on 28/10/23.
+//
+
+#include "j_node.h"
+
+
+
+
+// CREATE A NODE
+node_t *create_new_node(char *key, char *value) {
+    node_t *result = malloc(sizeof(node_t));
+    strcpy(result->value, value);
+    strcpy(result->key, key);
+    return result;
+}
+
+
+// INSERT NEW NODE INTO NODE LIST
+node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
+    node_to_insert->next = *head;
+    *head = node_to_insert;
+    return node_to_insert;
+}
+
+
+// Show All - (Print)
+void printlist(node_t *head) {
+    node_t *temporary = head;
+    
+    printf("Keys :  Value \n");
+
+    while (temporary != NULL) {
+        printf("%s :  %s \n", temporary->key, temporary->value);
+        temporary = temporary->next;
+    }
+}
+
+
+
+//  DONE FUNCTION
+
+
+// Search Query
+int find_node(node_t *head, char *key) {
+    node_t *tmp = head;
+    while (tmp != NULL) {
+        if (strcmp(tmp->key, key) == 0) {
+            return 1;
+        }
+        tmp = tmp->next;
+    }
+    return 0;
+}
+
+// delete node
+void delete_node(node_t **head, int index) {
+    node_t *previous = *head;
+    node_t *current = *head;
+    
+    if (*head == NULL){
+        printf("list is already empty");
+    }
+    else if(index == 1){
+        *head = current->next;
+        free(current);
+        current = NULL;
+    }
+    else {
+        while (index !=  1) {
+            previous = current;
+            current = current->next;
+            index--;
+        }
+        previous->next = current->next;
+        free(current);
+        current = NULL;
+    }
+}
+
+// UPDATE
+//void update_node(node_t *head, int value, int newValue) {
+//    node_t *tmp = head;
+//    while (tmp != NULL) {
+//        if (tmp->value == value) {
+//            tmp->value = newValue;
+//            break;
+//        }
+//        tmp = tmp->next;
+//    }
+//}
