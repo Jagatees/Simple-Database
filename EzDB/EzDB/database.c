@@ -16,6 +16,8 @@ struct DB {
     const char* UPDATE;
     const char* DELETE;
     const char* ALL;
+    const char* OPEN;
+    const char* SAVE;
 };
 
 struct DB db_instruction = {
@@ -24,7 +26,9 @@ struct DB db_instruction = {
     .INSERT = "INSERT",
     .QUERY = "QUERY",
     .UPDATE = "UPDATE",
-    .DELETE = "DELETE"
+    .DELETE = "DELETE",
+    .OPEN = "OPEN",
+    .SAVE = "SAVE",
 };
 
 

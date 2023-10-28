@@ -15,35 +15,32 @@
 #include "database.h"
 #include "j_node.h"
 
+
+void printFileContents(const char *filename) {
+    FILE *file = fopen(filename, "r");  // Open the file for reading
+    
+    // Check if the file was opened successfully
+    if (!file) {
+        perror("Error opening file");  // Print a descriptive error message
+        return;
+    }
+
+    char line[1024];  // Buffer to store each line from the file
+    while (fgets(line, sizeof(line), file)) {
+        printf("%s", line);  // Print each line
+    }
+
+    fclose(file);  // Close the file
+}
+
 int main(int argc, const char *argv[])
-{
-
-    // read any text file from currect directory
-    char const *const fileName = "table.txt";
-
-    FILE *file = fopen(fileName, "r");
-
-    if (!file)
-    {
-        printf("\n Unable to open : %s ", fileName);
-        return -1;
-    }
-
-    char line[256];
-    char key[256];
-    char value[256];
-
-
-
-    while (fgets(line, sizeof(line), file))
-    {
-        printf("%s", line);
-
-        sscanf(line, "%s %[^\n]", key, value);
-        printf("Key: %s, Value: %s\n", key, value);
-    }
-    fclose(file);
-    return 0;
+{   
+    
+    // cahnge so can just read from my own dir in future
+    const char *filename = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/table.txt";
+    printFileContents(filename);
+    
+    
 
     //    node_t *head = NULL;
     //    node_t *tmp;
