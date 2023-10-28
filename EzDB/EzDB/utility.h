@@ -15,4 +15,7 @@
 const char *characters = " ?\t\n";
 
 
+
+
+
 #endif /* utility_h */

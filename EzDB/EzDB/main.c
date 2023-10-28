@@ -15,69 +15,89 @@
 #include "database.h"
 #include "j_node.h"
 
+int main(int argc, const char *argv[])
+{
+
+    // read any text file from currect directory
+    char const *const fileName = "table.txt";
+
+    FILE *file = fopen(fileName, "r");
+
+    if (!file)
+    {
+        printf("\n Unable to open : %s ", fileName);
+        return -1;
+    }
+
+    char line[256];
+    char key[256];
+    char value[256];
 
 
-int main(int argc, const char * argv[]) {
-   
-    
-    
-    // Load some Fake Data into node
-    node_t *head = NULL;
-    node_t *tmp;
-    
-    tmp = create_new_node("MANGO", "6.5");
-    head = insert_at_head(&head, tmp);
 
-    tmp = create_new_node("ORANGE", "3.3");
-    head = insert_at_head(&head, tmp);
+    while (fgets(line, sizeof(line), file))
+    {
+        printf("%s", line);
 
-    tmp = create_new_node("APPLE", "4.2");
-    head = insert_at_head(&head, tmp);
-    
-    
-    // Get user input ,
-    // max number of string a user can enter in the line
-    char user_input[MAX_USER_INPUT];
-    int inDatabase = 0;
-    // rename this variable
-    int inc = 0;
-    char *inv[MAX_USER_INPUT];
-    
-    
-    printf("Welcome to EzDB\n");
-    
-    do {
-        // Display Text Message
-        printf("Enter Query :");
-        // Get a string os user input
-        fgets(user_input, MAX_USER_INPUT, stdin);
-        
-        
-        // conver to upper case
-        for (int i = 0; user_input[i]; i++) {
-            user_input[i] = toupper((unsigned char)user_input[i]);
-        }
-        
-        
-        // still not sure it like remove stuff from the string and store in inv[0] ?
-        inc = 0;
-        inv[inc] = strtok(user_input, characters);
+        sscanf(line, "%s %[^\n]", key, value);
+        printf("Key: %s, Value: %s\n", key, value);
+    }
+    fclose(file);
+    return 0;
 
-        // Split String
-        // Place a NULL as a last value
-        // break from there
-        while (inv[inc] != NULL) {
-            inc++;
-            inv[inc] = strtok(NULL, characters);
-        }
-        
-        // retturn (1 == break loop , 0 = keep looping)
-        inDatabase = logic_databse(inv, inc, &head);
-        
-    } while (!inDatabase);
-    
-    
+    //    node_t *head = NULL;
+    //    node_t *tmp;
+    //
+    //    tmp = create_new_node("MANGO", "6.5");
+    //    head = insert_at_head(&head, tmp);
+    //
+    //    tmp = create_new_node("ORANGE", "3.3");
+    //    head = insert_at_head(&head, tmp);
+    //
+    //    tmp = create_new_node("APPLE", "4.2");
+    //    head = insert_at_head(&head, tmp);
+    //
+    //
+    //    // Get user input ,
+    //    // max number of string a user can enter in the line
+    //    char user_input[MAX_USER_INPUT];
+    //    int inDatabase = 0;
+    //    // rename this variable
+    //    int inc = 0;
+    //    char *inv[MAX_USER_INPUT];
+    //
+    //
+    //    printf("Welcome to EzDB\n");
+    //
+    //    do {
+    //        // Display Text Message
+    //        printf("Enter Query :");
+    //        // Get a string os user input
+    //        fgets(user_input, MAX_USER_INPUT, stdin);
+    //
+    //
+    //        // conver to upper case
+    //        for (int i = 0; user_input[i]; i++) {
+    //            user_input[i] = toupper((unsigned char)user_input[i]);
+    //        }
+    //
+    //
+    //        // still not sure it like remove stuff from the string and store in inv[0] ?
+    //        inc = 0;
+    //        inv[inc] = strtok(user_input, characters);
+    //
+    //        // Split String
+    //        // Place a NULL as a last value
+    //        // break from there
+    //        while (inv[inc] != NULL) {
+    //            inc++;
+    //            inv[inc] = strtok(NULL, characters);
+    //        }
+    //
+    //        // retturn (1 == break loop , 0 = keep looping)
+    //        inDatabase = logic_databse(inv, inc, &head);
+    //
+    //    } while (!inDatabase);
+
     return 0;
 }
-
-

@@ -1,0 +1,4 @@
+Key	Value
+Mango	6.5
+Orange	3.3
+Apple	4.2

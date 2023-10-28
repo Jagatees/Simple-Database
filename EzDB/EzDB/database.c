@@ -100,7 +100,7 @@ int logic_databse(char *inv[], int inc, node_t **head){
         return 0;
     }
     else {
-        printf("I don't understand this command %s\n", inv[0]);  // INVAILD INSTRUCTION
+        printf("I don't understand this command %s\n", inv[0]);
         return 0;
     }
 
