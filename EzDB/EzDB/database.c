@@ -18,6 +18,7 @@ struct DB {
     const char* ALL;
     const char* OPEN;
     const char* SAVE;
+    const char* EXIT;
 };
 
 struct DB db_instruction = {
@@ -29,6 +30,7 @@ struct DB db_instruction = {
     .DELETE = "DELETE",
     .OPEN = "OPEN",
     .SAVE = "SAVE",
+    .EXIT = "EXIT",
 };
 
 
@@ -73,6 +75,7 @@ int logic_databse(char *inv[], int inc, node_t **head){
         
         int isfound = find_node(*head, inv[1]);
         
+        // CHANGE SO IT CAN PRINT OUT THE VALUE FOR THE KEY
         if (isfound == 1) {
             printf("A record of Key=%s, Value= {missing value} is found in the database.\n", inv[1]);
         } else if (isfound == 0){
@@ -103,11 +106,22 @@ int logic_databse(char *inv[], int inc, node_t **head){
         delete_node(head, inv[1]);
         return 0;
     }
-    else if (strcmp(inv[0], db_instruction.DELETE) == 0) // DELETE INSTRUCTION
+    else if (strcmp(inv[0], db_instruction.OPEN) == 0) // DELETE INSTRUCTION
     {
-        printf("Welcome to DELETE Instruction\n");
-        delete_node(head, inv[1]);
+        printf("Welcome to OPEN from database Instruction\n");
+
         return 0;
+    }
+    else if (strcmp(inv[0], db_instruction.SAVE) == 0) // DELETE INSTRUCTION
+    {
+        printf("Welcome to SAVE to database Instruction\n");
+       
+        return 0;
+    }
+    else if (strcmp(inv[0], db_instruction.EXIT) == 0) // DELETE INSTRUCTION
+    {
+        printf("Disconnected from J_Database...\n");
+        return 1;
     }
     else {
         printf("I don't understand this command %s\n", inv[0]);

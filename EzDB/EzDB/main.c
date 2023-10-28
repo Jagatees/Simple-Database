@@ -18,7 +18,7 @@
 int main(int argc, const char *argv[])
 {
     
-    // cahnge so can just read from my own dir in future
+    // CHANGE SO IT WILL READ FROM INTERNAL DIR
     const char *filename = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/table.txt";
     node_t *head = printFileContents(filename);
 
