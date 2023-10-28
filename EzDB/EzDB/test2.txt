@@ -1,4 +1,3 @@
-straw	3
-Apple	4.2
-Orange	3.3
+Key	Value
 Mango	6.5
+STraw	2.0
