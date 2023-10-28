@@ -72,12 +72,12 @@ int logic_databse(char *inv[], int inc, node_t **head){
         printf("Welcome to QUERY Instruction\n");
 
         
-        int isfound = find_node(*head, inv[1]);
-        
+        char *isfound = find_node_return_string(*head, inv[1]);
+      
         // CHANGE SO IT CAN PRINT OUT THE VALUE FOR THE KEY
-        if (isfound == 1) {
-            printf("A record of Key=%s, Value= {missing value} is found in the database.\n", inv[1]);
-        } else if (isfound == 0){
+        if (strcmp(isfound, "EMPTY") != 0) {
+            printf("A record of Key=%s, Value= %s is found in the database.\n", inv[1], isfound);
+        } else if (strcmp(isfound, "EMPTY") == 0){
             printf("There is no record with Key=%s found in the database\n", inv[1]);
         }
         
@@ -117,9 +117,6 @@ int logic_databse(char *inv[], int inc, node_t **head){
     {
         printf("Welcome to SAVE to database Instruction\n");
         saveFromFile(head);
-        
-        
-       
         return 0;
     }
     else if (strcmp(inv[0], db_instruction.EXIT) == 0) // DELETE INSTRUCTION

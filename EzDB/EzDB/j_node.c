@@ -48,6 +48,17 @@ int find_node(node_t *head, char *key) {
     return 0;
 }
 
+char* find_node_return_string(node_t *head, char *key) {
+    node_t *tmp = head;
+    while (tmp != NULL) {
+        if (strcmp(tmp->key, key) == 0) {
+            return tmp->value;
+        }
+        tmp = tmp->next;
+    }
+    return "EMPTY";
+}
+
 // delete node
 void delete_node(node_t **head, char *keys) {
     node_t *previous = *head;

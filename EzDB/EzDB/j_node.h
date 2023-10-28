@@ -24,6 +24,7 @@ typedef struct node node_t;
 
 node_t *create_new_node(char *key, char *value);
 int find_node(node_t *head, char *key);
+char* find_node_return_string(node_t *head, char *key);
 void printlist(node_t *head);
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
 void delete_node(node_t **head, char *keys);
