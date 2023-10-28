@@ -37,6 +37,7 @@ struct DB db_instruction = {
 
 // inv is the list of user input string and inc is the counter length
 int logic_databse(char *inv[], int inc, node_t **head){
+
     
     if (inv[0] == NULL) {
         printf("U Enter Nothing So we are kicking u out .\n");
@@ -110,13 +111,16 @@ int logic_databse(char *inv[], int inc, node_t **head){
     {
         printf("Welcome to OPEN from database Instruction\n");
         const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/test2.txt";
-       printFileContents(database_file, head);
+        readFromFile(database_file, head);
 
         return 0;
     }
     else if (strcmp(inv[0], db_instruction.SAVE) == 0) // DELETE INSTRUCTION
     {
         printf("Welcome to SAVE to database Instruction\n");
+        saveFromFile(head);
+        
+        
        
         return 0;
     }
@@ -145,14 +149,13 @@ char *rtrim(char *s)
     return s;
 }
 
-node_t* printFileContents(const char *filename, node_t **mainHead) {
+void readFromFile(const char *filename, node_t **mainHead) {
     node_t *head = NULL;
     node_t *tmp;
     FILE *file = fopen(filename, "r");
     
     if (!file) {
         perror("Error opening file");
-        return NULL;
     }
  
     char line[1024];
@@ -170,5 +173,27 @@ node_t* printFileContents(const char *filename, node_t **mainHead) {
     }
 
     fclose(file);
-    return head;
+}
+
+
+void saveFromFile(node_t **head) {
+    
+    node_t *temporary = *head;
+    
+    printf("Keys :  Value \n");
+    
+    const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/test2.txt";
+    FILE *file = fopen(database_file, "w");
+
+    fprintf(file, "%s\t%s\n", "Key", "Value");
+
+    while (temporary != NULL) {
+        fprintf(file, "%s\t%s\n", temporary->key, temporary->value);
+
+        temporary = temporary->next;
+    }
+    
+    fclose(file);
+
+    
 }

@@ -19,7 +19,8 @@
 // Logic of Database
 int logic_databse(char *inv[], int inc, node_t **head);
 char *rtrim(char *s);
-node_t* printFileContents(const char *filename, node_t **head);
+void readFromFile(const char *filename, node_t **head);
+void saveFromFile(node_t **head);
 
 
 

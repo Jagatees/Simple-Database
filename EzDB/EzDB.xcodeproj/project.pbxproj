@@ -33,6 +33,7 @@
 		B9BBE6242AECC0E300115D3E /* j_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = j_node.h; sourceTree = "<group>"; };
 		B9BBE6252AECC0E300115D3E /* j_node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = j_node.c; sourceTree = "<group>"; };
 		B9BBE6272AED0FEE00115D3E /* table.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = table.txt; sourceTree = "<group>"; };
+		B9BBE62B2AED7C3D00115D3E /* test2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.txt; sourceTree = "<group>"; };
 		B9C4EAE42AE74BA800B51913 /* EzDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EzDB; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C4EAE72AE74BA800B51913 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +68,7 @@
 		B9C4EAE62AE74BA800B51913 /* EzDB */ = {
 			isa = PBXGroup;
 			children = (
+				B9BBE62B2AED7C3D00115D3E /* test2.txt */,
 				B9BBE6272AED0FEE00115D3E /* table.txt */,
 				B9757B742AE9133D007D5FC6 /* utility.h */,
 				B9C4EAE72AE74BA800B51913 /* main.c */,

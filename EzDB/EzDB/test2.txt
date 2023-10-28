@@ -1,4 +1,4 @@
-Key	Value
-Mango	6.5
-Orange	3.3
+straw	3
 Apple	4.2
+Orange	3.3
+Mango	6.5
