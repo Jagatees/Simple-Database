@@ -94,6 +94,17 @@ void delete_node(node_t **head, int index) {
     }
 }
 
+// UPDATE
+void update_node(node_t *head, int value, int newValue) {
+    node_t *tmp = head;
+    while (tmp != NULL) {
+        if (tmp->value == value) {
+            tmp->value = newValue;
+            break;
+        }
+        tmp = tmp->next;
+    }
+}
 
 
 int main(int argc, const char * argv[]) {
@@ -117,8 +128,9 @@ int main(int argc, const char * argv[]) {
 
     printlist(head);
 
-    
-    
+    update_node(head, 4, 400);
+    printlist(head);
+
     
     
 //    // Get user input , 
