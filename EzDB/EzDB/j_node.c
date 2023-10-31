@@ -36,6 +36,21 @@ void printlist(node_t *head) {
     }
 }
 
+int list_node(node_t *head){
+    
+    int counter = 0;
+    node_t *temporary = head;
+    
+    while (temporary != NULL) {
+        temporary = temporary->next;
+        counter += 1;
+    }
+    
+    
+    return counter;
+}
+
+
 // Search Query
 int find_node(node_t *head, char *key) {
     node_t *tmp = head;

@@ -23,6 +23,7 @@ struct node {
 typedef struct node node_t;
 
 node_t *create_new_node(char *key, char *value);
+int list_node(node_t *head);
 int find_node(node_t *head, char *key);
 char* find_node_return_string(node_t *head, char *key);
 void printlist(node_t *head);

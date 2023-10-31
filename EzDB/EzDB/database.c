@@ -46,6 +46,7 @@ int logic_database(char *inv[], int inc, node_t **head){
     }
     if (inc >= 2 && strcmp(inv[0], db_instruction.SHOW) == 0 && strcmp(inv[1], db_instruction.ALL) == 0) // SHOW ALL INSTRUCTION
     {
+        printf("Number of item in list : %i\n" ,list_node(*head));
         printlist(*head);
         return 0;
     }
