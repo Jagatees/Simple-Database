@@ -54,7 +54,7 @@ int main(int argc, const char *argv[])
         }
 
         // retturn (1 == break loop , 0 = keep looping)
-        inDatabase = logic_databse(inv, inc, &head);
+        inDatabase = logic_database(inv, inc, &head);
 
     } while (!inDatabase);
 

@@ -36,20 +36,21 @@ struct DB db_instruction = {
 
 
 // inv is the list of user input string and inc is the counter length
-int logic_databse(char *inv[], int inc, node_t **head){    
+int logic_database(char *inv[], int inc, node_t **head){  
+    
+    // do my conver to upper here before sending it down to check
+    
+    
     if (inv[0] == NULL) {
-        printf("U Enter Nothing So we are kicking u out .\n");
-        return 1;
+        return 0;
     }
     if (inc >= 2 && strcmp(inv[0], db_instruction.SHOW) == 0 && strcmp(inv[1], db_instruction.ALL) == 0) // SHOW ALL INSTRUCTION
     {
-        printf("Welcome to SHOW ALL Instruction\n");
         printlist(*head);
         return 0;
     }
     if (strcmp(inv[0], db_instruction.INSERT) == 0)
     {
-        printf("Welcome to INSERT Instruction\n");
         
         // 1 = FOUND
         // 0 = NOT FOUND
@@ -69,8 +70,6 @@ int logic_databse(char *inv[], int inc, node_t **head){
     }
     else if (strcmp(inv[0], db_instruction.QUERY) == 0) // QUERY INSTRUCTION
     {
-        printf("Welcome to QUERY Instruction\n");
-
         
         char *isfound = find_node_return_string(*head, inv[1]);
       
@@ -123,7 +122,7 @@ int logic_databse(char *inv[], int inc, node_t **head){
     }
     else if (strcmp(inv[0], db_instruction.EXIT) == 0) // DELETE INSTRUCTION
     {
-        printf("Disconnected from J_Database...\n");
+        printf("Exit EzDB\n");
         return 1;
     }
     else if (strcmp(inv[0], db_instruction.HELP) == 0) // DELETE INSTRUCTION
@@ -132,7 +131,7 @@ int logic_databse(char *inv[], int inc, node_t **head){
         return 0;
     }
     else {
-        printf("I don't understand this command %s\n", inv[0]);
+        printf("instruction not found : %s\n", inv[0]);
         return 0;
     }
 

@@ -10,13 +10,8 @@
 
 #include <stdio.h>
 
-#include "j_node.h"
-
 #define MAX_USER_INPUT 256
 const char *characters = " ?\t\n";
-
-
-
 
 
 #endif /* utility_h */
