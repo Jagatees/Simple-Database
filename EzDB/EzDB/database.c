@@ -162,8 +162,9 @@ void readFromFile(const char *filename, node_t **mainHead) {
     fgets(line, sizeof(line), file);
 
     while (fgets(line, sizeof(line), file)) {
-        char *key = strtok(line, "\t");
-        char *value = strtok(NULL, "\t");
+        // change this based on u want " " Space or "\t" for tab space in between
+        char *key = strtok(line, " ");
+        char *value = strtok(NULL, " ");
         
         if (key && value) {
             tmp = create_new_node(rtrim(key), rtrim(value));
