@@ -110,7 +110,7 @@ int logic_database(char *inv[], int inc, node_t **head){
     else if (strcmp(inv[0], db_instruction.OPEN) == 0) // DELETE INSTRUCTION
     {
         printf("Welcome to OPEN from database Instruction\n");
-        const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/test2.txt";
+        const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
         readFromFile(database_file, head);
 
         return 0;
@@ -182,7 +182,7 @@ void saveFromFile(node_t **head) {
     
     printf("Keys :  Value \n");
     
-    const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/test2.txt";
+    const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
     FILE *file = fopen(database_file, "w");
 
     fprintf(file, "%s\t%s\n", "Key", "Value");

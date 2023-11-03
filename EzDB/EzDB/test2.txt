@@ -1,3 +1,0 @@
-Key	Value
-Mango	6.5
-STraw	2.0
