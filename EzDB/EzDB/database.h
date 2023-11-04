@@ -1,28 +1,28 @@
-//
-//  database.h
-//  EzDB
-//
-//  Created by Jagateesvaran on 25/10/23.
-//
-
 #ifndef database_h
 #define database_h
 
+// Include C Header Files
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 
+
+// Include Custom Header Files
 #include "j_node.h"
 
 
-// Logic of Database
+// Handle Database Login based on user_input
 int logic_database(char *inv[], int inc, node_t **head);
+
+// Remove Trailling Whitespace from string
 char *rtrim(char *s);
+
+// Read From a TXT File and Load it into Cache (Linked List Node)
 void readFromFile(const char *filename, node_t **head);
-void saveFromFile(node_t **head);
 
-
+// Save Data from Cache to TXT File
+void saveFromFile(node_t **head, const char *filename);
 
 
 #endif /* database_h */

@@ -32,28 +32,38 @@ int main(int argc, const char *argv[])
     printf("-------Welcome to EzDB-------\n");
 
     // Database Loop
+    
+    // FLOW
+    // User enter = INSERT Mango 4.3
+    // userinput[0] = I
+    // userinput[1] = N
+    // etc
+    // split_user_input[0] = INSERT , counter++
+    // split_user_input[1] = Mango , counter++
+    // split_user_input[2] = 4.3 . counter++
+    // send the split , counter and pointer to head to database
+    
     do
     {
         // Print Input Line
         printf("Enter INSTRUCTION :");
-        // store the whole line of test user enter
+        
+        // store user input
         fgets(user_input, MAX_USER_INPUT, stdin);
        
         // init counter to zero
-        // 
         counter = 0;
+        // store user input in a split format
         split_user_input[counter] = strtok(user_input, characters);
 
-        // Split String
-        // Place a NULL as a last value
-        // break from there
+        // Split String - until reach null mean end of user input
         while (split_user_input[counter] != NULL)
         {
             counter++;
             split_user_input[counter] = strtok(NULL, characters);
         }
 
-        
+        // init database logic
         inDatabase = logic_database(split_user_input, counter, &head);
 
     } while (!inDatabase);

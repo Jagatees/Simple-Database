@@ -7,6 +7,7 @@
 
 #include "database.h"
 
+// Structure to represent DB instruction
 struct DB {
     const char* SHOW;
     const char* INSERT;
@@ -20,6 +21,7 @@ struct DB {
     const char* HELP;
 };
 
+// Create instance of DB instruction list
 struct DB db_instruction = {
     .SHOW = "SHOW",
     .ALL = "ALL",
@@ -34,47 +36,46 @@ struct DB db_instruction = {
 };
 
 
+char* file_Dir = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
 
-// inv is the list of user input string and inc is the counter length
-int logic_database(char *inv[], int inc, node_t **head){  
-    
-    // do my conver to upper here before sending it down to check
-    
-    
+
+
+// Handle Database instruction based on user input
+int logic_database(char *inv[], int inc, node_t **head){
+
+    // No User Input , Display Empty Input
     if (inv[0] == NULL) {
+        printf("Empty Input");
         return 0;
     }
-    if (inc >= 2 && strcmp(inv[0], db_instruction.SHOW) == 0 && strcmp(inv[1], db_instruction.ALL) == 0) // SHOW ALL INSTRUCTION
+    // Check User Input Match Instruction SHOW ALL
+    if (inc >= 2 && strcmp(inv[0], db_instruction.SHOW) == 0 && strcmp(inv[1], db_instruction.ALL) == 0)
     {
         printf("There are in total %i records found: \n" ,list_node(*head));
         printlist(*head);
         return 0;
     }
+    // Check User Input Match Instruction INSERT
     if (strcmp(inv[0], db_instruction.INSERT) == 0)
     {
-        
-        // 1 = FOUND
-        // 0 = NOT FOUND
-        
         int isfound = find_node(*head, inv[1]);
         
         if (isfound == 1) {
             printf("The record with Key=%s already exists in the database\n", inv[1]);
         } else if (isfound == 0){
-            // need do some error handling user the 2 value is not a right type
             node_t *tmp = create_new_node(inv[1], inv[2]);
             insert_at_head(head, tmp);
             printf("A new record of Key=%s Value=%s is successfully inserted\n", inv[1], inv[2]);
         }
         
-        return 0; // to say if we still in the game
+        return 0;
     }
-    else if (strcmp(inv[0], db_instruction.QUERY) == 0) // QUERY INSTRUCTION
+    // Check User Input Match Instruction QUERY
+    else if (strcmp(inv[0], db_instruction.QUERY) == 0)
     {
         
         char *isfound = find_node_return_string(*head, inv[1]);
       
-        // CHANGE SO IT CAN PRINT OUT THE VALUE FOR THE KEY
         if (strcmp(isfound, "EMPTY") != 0) {
             printf("A record of Key=%s, Value= %s is found in the database.\n", inv[1], isfound);
         } else if (strcmp(isfound, "EMPTY") == 0){
@@ -84,9 +85,9 @@ int logic_database(char *inv[], int inc, node_t **head){
         
         return 0;
     }
-    else if (strcmp(inv[0], db_instruction.UPDATE) == 0) // UPDATE INSTRUCTION
+    // Check User Input Match Instruction UPDATE
+    else if (strcmp(inv[0], db_instruction.UPDATE) == 0)
     {
-        printf("Welcome to UPDATE Instruction\n");
         
         int isfound = find_node(*head, inv[1]);
         
@@ -99,38 +100,39 @@ int logic_database(char *inv[], int inc, node_t **head){
         
         return 0;
     }
+    // Check User Input Match Instruction DELETE
     else if (strcmp(inv[0], db_instruction.DELETE) == 0) // DELETE INSTRUCTION
     {
-        printf("Welcome to DELETE Instruction\n");
         
         printf("The record of Key=%s is successfully deleted.", inv[1]);
         delete_node(head, inv[1]);
         return 0;
     }
+    // Check User Input Match Instruction OPEN
     else if (strcmp(inv[0], db_instruction.OPEN) == 0) // DELETE INSTRUCTION
     {
-        printf("Welcome to OPEN from database Instruction\n");
-        const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
-        readFromFile(database_file, head);
-
+        readFromFile(file_Dir, head);
         return 0;
     }
+    // Check User Input Match Instruction SAVE
     else if (strcmp(inv[0], db_instruction.SAVE) == 0) // DELETE INSTRUCTION
     {
-        printf("Welcome to SAVE to database Instruction\n");
-        saveFromFile(head);
+        saveFromFile(head, file_Dir);
         return 0;
     }
+    // Check User Input Match Instruction EXIT
     else if (strcmp(inv[0], db_instruction.EXIT) == 0) // DELETE INSTRUCTION
     {
         printf("Exit EzDB\n");
         return 1;
     }
+    // Check User Input Match Instruction HELP
     else if (strcmp(inv[0], db_instruction.HELP) == 0) // DELETE INSTRUCTION
     {
         printf("--------------INSTRUCTION LIST--------------\nSHOW ALL \t\t\t : PRINT OUT TABLE\nINSERT [Key] [Value] : Insert Into Table\nQuery [Key] \t\t : Display Data from table\nUPDATE [Key] [Value] : Update a value in the table\nDELETE [Key] \t\t : remove key from table\nOPEN [filename.txt]  : load data from file into cache\nSAVE [filename.txt]  : save data from cache into .txt\n");
         return 0;
     }
+    // Invaild Instruction
     else {
         printf("instruction not found : %s\n", inv[0]);
         return 0;
@@ -150,9 +152,10 @@ char *rtrim(char *s)
 }
 
 void readFromFile(const char *filename, node_t **mainHead) {
+   
+    FILE *file = fopen(filename, "r");
     node_t *head = NULL;
     node_t *tmp;
-    FILE *file = fopen(filename, "r");
     
     if (!file) {
         perror("Error opening file");
@@ -177,19 +180,18 @@ void readFromFile(const char *filename, node_t **mainHead) {
 }
 
 
-void saveFromFile(node_t **head) {
+void saveFromFile(node_t **head, const char *filename) {
     
     node_t *temporary = *head;
     
     printf("Keys :  Value \n");
     
-    const char *database_file = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
-    FILE *file = fopen(database_file, "w");
+    FILE *file = fopen(filename, "w");
 
     fprintf(file, "%s\t%s\n", "Key", "Value");
 
     while (temporary != NULL) {
-        fprintf(file, "%s\t%s\n", temporary->key, temporary->value);
+        fprintf(file, "%s %s\n", temporary->key, temporary->value);
 
         temporary = temporary->next;
     }
