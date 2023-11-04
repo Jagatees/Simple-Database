@@ -43,7 +43,7 @@ int logic_database(char *inv[], int inc, node_t **head){
 
     // No User Input , Display Empty Input
     if (inv[0] == NULL) {
-        printf("Empty Input");
+        printf("Empty Input\n");
         return 0;
     }
     // Check User Input Match Instruction SHOW ALL
@@ -154,8 +154,15 @@ char *rtrim(char *s)
 void readFromFile(const char *filename, node_t **mainHead) {
    
     FILE *file = fopen(filename, "r");
-    node_t *head = NULL;
+    
+    node_t *head;
     node_t *tmp;
+    
+    if (*mainHead != NULL) {
+        head = *mainHead;
+    } else  {
+        head = NULL;
+    }
     
     if (!file) {
         perror("Error opening file");
@@ -170,9 +177,16 @@ void readFromFile(const char *filename, node_t **mainHead) {
         char *value = strtok(NULL, " ");
         
         if (key && value) {
-            tmp = create_new_node(rtrim(key), rtrim(value));
-            head = insert_at_head(&head, tmp);
-            *mainHead = head;
+            
+            int x = find_node(head, key);
+            
+            
+            if (x == 0) {
+                tmp = create_new_node(rtrim(key), rtrim(value));
+                head = insert_at_head(&head, tmp);
+                *mainHead = head;
+            }
+           
         }
     }
 
