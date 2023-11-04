@@ -27,14 +27,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B921C03C2AF62492001EB93F /* Color.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Color.txt; sourceTree = "<group>"; };
+		B915A9442AF645F700E50C7B /* Color.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Color.txt; path = Build/Products/Release/Color.txt; sourceTree = "<group>"; };
 		B9757B6E2AE8E94A007D5FC6 /* database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
 		B9757B6F2AE8E94A007D5FC6 /* database.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = database.c; sourceTree = "<group>"; };
 		B9757B742AE9133D007D5FC6 /* utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
 		B9BBE6242AECC0E300115D3E /* j_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = j_node.h; sourceTree = "<group>"; };
 		B9BBE6252AECC0E300115D3E /* j_node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = j_node.c; sourceTree = "<group>"; };
 		B9C4EAE42AE74BA800B51913 /* EzDB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EzDB; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9C4EAE72AE74BA800B51913 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		B9C4EAE72AE74BA800B51913 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../../../Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/main.c; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +51,7 @@
 		B9C4EADB2AE74BA800B51913 = {
 			isa = PBXGroup;
 			children = (
+				B915A9442AF645F700E50C7B /* Color.txt */,
 				B9C4EAE62AE74BA800B51913 /* EzDB */,
 				B9C4EAE52AE74BA800B51913 /* Products */,
 			);
@@ -67,7 +68,6 @@
 		B9C4EAE62AE74BA800B51913 /* EzDB */ = {
 			isa = PBXGroup;
 			children = (
-				B921C03C2AF62492001EB93F /* Color.txt */,
 				B9757B742AE9133D007D5FC6 /* utility.h */,
 				B9C4EAE72AE74BA800B51913 /* main.c */,
 				B9757B6E2AE8E94A007D5FC6 /* database.h */,

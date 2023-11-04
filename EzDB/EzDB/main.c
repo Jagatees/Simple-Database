@@ -10,8 +10,6 @@
 #include "database.h" // Structure of Database
 #include "j_node.h"   // Structure of Linked List
 
-
-
 int main(int argc, const char *argv[])
 {
     
@@ -64,7 +62,7 @@ int main(int argc, const char *argv[])
         }
 
         // init database logic
-        inDatabase = logic_database(split_user_input, counter, &head);
+        inDatabase = databaseLogic(split_user_input, counter, &head);
 
     } while (!inDatabase);
 
