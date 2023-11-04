@@ -22,7 +22,7 @@ char *rtrim(char *s);
 void readFromFile(const char *filename, node_t **head);
 
 // Save Data from Cache to TXT File
-void saveFromFile(node_t **head, const char *filename);
+void saveFromFile(const char *filenam, node_t **head);
 
 
 #endif /* database_h */

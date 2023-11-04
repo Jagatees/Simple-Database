@@ -27,8 +27,6 @@ node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
 // Show All - (Print)
 void printlist(node_t *head) {
     node_t *temporary = head;
-    
-//    printf("Keys :  Value \n");
 
     while (temporary != NULL) {
         printf("%s %s \n", temporary->key, temporary->value);

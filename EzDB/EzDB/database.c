@@ -36,9 +36,7 @@ struct DB db_instruction = {
 };
 
 
-char* file_Dir = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Country.txt";
-
-
+char* file_Dir = "/Users/jagatees/Desktop/Files/Github_Hubs/Console_ChatBot/C_Console_Chat_Bot/EzDB/EzDB/Color.txt";
 
 // Handle Database instruction based on user input
 int logic_database(char *inv[], int inc, node_t **head){
@@ -111,19 +109,21 @@ int logic_database(char *inv[], int inc, node_t **head){
     // Check User Input Match Instruction OPEN
     else if (strcmp(inv[0], db_instruction.OPEN) == 0) // DELETE INSTRUCTION
     {
+        printf("OPEN Data from this file %s\n", inv[1]);
         readFromFile(file_Dir, head);
         return 0;
     }
     // Check User Input Match Instruction SAVE
     else if (strcmp(inv[0], db_instruction.SAVE) == 0) // DELETE INSTRUCTION
     {
-        saveFromFile(head, file_Dir);
+        printf("SAVE Data to this file %s\n", inv[1]);
+        saveFromFile(file_Dir, head);
         return 0;
     }
     // Check User Input Match Instruction EXIT
     else if (strcmp(inv[0], db_instruction.EXIT) == 0) // DELETE INSTRUCTION
     {
-        printf("Exit EzDB\n");
+        printf("Exit Database\n");
         return 1;
     }
     // Check User Input Match Instruction HELP
@@ -180,19 +180,16 @@ void readFromFile(const char *filename, node_t **mainHead) {
 }
 
 
-void saveFromFile(node_t **head, const char *filename) {
+void saveFromFile(const char *filename , node_t **head) {
     
     node_t *temporary = *head;
-    
-    printf("Keys :  Value \n");
-    
+        
     FILE *file = fopen(filename, "w");
 
     fprintf(file, "%s\t%s\n", "Key", "Value");
 
     while (temporary != NULL) {
         fprintf(file, "%s %s\n", temporary->key, temporary->value);
-
         temporary = temporary->next;
     }
     
