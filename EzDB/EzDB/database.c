@@ -180,13 +180,11 @@ void readFromFile(const char *filename, node_t **mainHead) {
             
             int x = find_node(head, key);
             
-            
             if (x == 0) {
                 tmp = create_new_node(rtrim(key), rtrim(value));
                 head = insert_at_head(&head, tmp);
                 *mainHead = head;
             }
-           
         }
     }
 
