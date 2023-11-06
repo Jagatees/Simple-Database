@@ -1,7 +1,7 @@
 
 // Include C Header Files
-#include <stdio.h> // input-output
-#include <ctype.h> // Character Type
+#include <stdio.h>  // input-output
+#include <ctype.h>  // Character Type
 #include <string.h> // String Manipulation
 #include <stdlib.h> // Standard Library
 
@@ -12,16 +12,16 @@
 
 int main(int argc, const char *argv[])
 {
-    
+
     // init linked head to null on start
     node_t *head = NULL;
-    
+
     // Store user input
     char user_input[MAX_USER_INPUT];
-    
+
     // Database Loop (think of it like a game loop) , 0 == still in database , 1 == will exit database
     int inDatabase = 0;
-    
+
     // Split User Input
     int counter = 0;
     char *split_user_input[MAX_USER_INPUT];
@@ -30,7 +30,7 @@ int main(int argc, const char *argv[])
     printf("-------Welcome to EzDB-------\n");
 
     // Database Loop
-    
+
     // FLOW
     // User enter = INSERT Mango 4.3
     // userinput[0] = I
@@ -40,15 +40,15 @@ int main(int argc, const char *argv[])
     // split_user_input[1] = Mango , counter++
     // split_user_input[2] = 4.3 . counter++
     // send the split , counter and pointer to head to database
-    
+
     do
     {
         // Print Input Line
         printf("Enter INSTRUCTION :");
-        
+
         // store user input
         fgets(user_input, MAX_USER_INPUT, stdin);
-       
+
         // init counter to zero
         counter = 0;
         // store user input in a split format

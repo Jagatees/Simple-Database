@@ -13,11 +13,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-struct node {
+struct node
+{
     char value[256];
     char key[256];
-    struct node* next;
+    struct node *next;
 };
 
 typedef struct node node_t;
@@ -25,7 +25,7 @@ typedef struct node node_t;
 node_t *create_new_node(char *key, char *value);
 int list_node(node_t *head);
 int find_node(node_t *head, char *key);
-char* find_node_return_string(node_t *head, char *key);
+char *find_node_return_string(node_t *head, char *key);
 void printlist(node_t *head);
 node_t *insert_at_head(node_t **head, node_t *node_to_insert);
 void delete_node(node_t **head, char *keys);

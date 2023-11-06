@@ -28,5 +28,3 @@ void readFromFile(const char *filename, node_t **head);
 void saveFromFile(const char *filenam, node_t **head);
 
 #endif /* database_h */
-
-

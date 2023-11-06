@@ -8,52 +8,57 @@
 #include "j_node.h"
 
 // CREATE A NODE
-node_t *create_new_node(char *key, char *value) {
+node_t *create_new_node(char *key, char *value)
+{
     node_t *result = malloc(sizeof(node_t));
     strcpy(result->value, value);
     strcpy(result->key, key);
     return result;
 }
 
-
 // INSERT NEW NODE INTO NODE LIST
-node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
+node_t *insert_at_head(node_t **head, node_t *node_to_insert)
+{
     node_to_insert->next = *head;
     *head = node_to_insert;
     return node_to_insert;
 }
 
-
 // Show All - (Print)
-void printlist(node_t *head) {
+void printlist(node_t *head)
+{
     node_t *temporary = head;
 
-    while (temporary != NULL) {
+    while (temporary != NULL)
+    {
         printf("%s %s \n", temporary->key, temporary->value);
         temporary = temporary->next;
     }
 }
 
-int list_node(node_t *head){
-    
+int list_node(node_t *head)
+{
+
     int counter = 0;
     node_t *temporary = head;
-    
-    while (temporary != NULL) {
+
+    while (temporary != NULL)
+    {
         temporary = temporary->next;
         counter += 1;
     }
-    
-    
+
     return counter;
 }
 
-
 // Search Query
-int find_node(node_t *head, char *key) {
+int find_node(node_t *head, char *key)
+{
     node_t *tmp = head;
-    while (tmp != NULL) {
-        if (strcmp(tmp->key, key) == 0) {
+    while (tmp != NULL)
+    {
+        if (strcmp(tmp->key, key) == 0)
+        {
             return 1;
         }
         tmp = tmp->next;
@@ -61,10 +66,13 @@ int find_node(node_t *head, char *key) {
     return 0;
 }
 
-char* find_node_return_string(node_t *head, char *key) {
+char *find_node_return_string(node_t *head, char *key)
+{
     node_t *tmp = head;
-    while (tmp != NULL) {
-        if (strcmp(tmp->key, key) == 0) {
+    while (tmp != NULL)
+    {
+        if (strcmp(tmp->key, key) == 0)
+        {
             return tmp->value;
         }
         tmp = tmp->next;
@@ -73,25 +81,29 @@ char* find_node_return_string(node_t *head, char *key) {
 }
 
 // delete node
-void delete_node(node_t **head, char *keys) {
+void delete_node(node_t **head, char *keys)
+{
     node_t *previous = *head;
     node_t *current = *head;
-    
+
     // Check if the head node is the one to be deleted
-    if(strcmp(current->key, keys) == 0){
+    if (strcmp(current->key, keys) == 0)
+    {
         *head = current->next;
         free(current);
         return;
     }
-        
+
     // Search for the node to be deleted
-    while(current != NULL && strcmp(current->key, keys) != 0) {
+    while (current != NULL && strcmp(current->key, keys) != 0)
+    {
         previous = current;
         current = current->next;
     }
 
     // If the key wasn't found in the list
-    if(current == NULL) {
+    if (current == NULL)
+    {
         printf("Key not found in the list\n");
         return;
     }
@@ -102,10 +114,13 @@ void delete_node(node_t **head, char *keys) {
 }
 
 // UPDATE
-int update_node(node_t *head, char *key, char *newvalue) {
+int update_node(node_t *head, char *key, char *newvalue)
+{
     node_t *tmp = head;
-    while (tmp != NULL) {
-        if (strcmp(tmp->key, key) == 0) {
+    while (tmp != NULL)
+    {
+        if (strcmp(tmp->key, key) == 0)
+        {
             printf("Updated key \"%s\" with new value \n", tmp->value);
             strcpy(tmp->value, newvalue);
             printf("Updated key \"%s\" with new value \n", tmp->value);
