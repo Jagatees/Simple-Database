@@ -188,9 +188,12 @@ int databaseLogic(char *inv[], int inc, node_t **head)
 
             if (strcmp(inv[1], "Color.txt") == 0)
             {
-                readFromFile(cwd, head);
-                printf("Save Key & Values into cahe from %s\n", inv[1]);
-                isOPEN = 1;
+                int x = readFromFile(cwd, head);
+                if (x == 1) {
+                    printf("Save Key & Values into cahe from %s\n", inv[1]);
+                    isOPEN = 1;
+                }
+               
             }
             else
             {
@@ -202,7 +205,21 @@ int databaseLogic(char *inv[], int inc, node_t **head)
         // Check User Input Match Instruction HELP
         else if (strcmp(inv[0], db_instruction.HELP) == 0) // DELETE INSTRUCTION
         {
-            printf("--------------INSTRUCTION LIST--------------\nOPEN [filename.txt]  : load data from file into cache\n");
+            
+            char cwd[MAX_PATH_LEN];
+            if (getcwd(cwd, sizeof(cwd)) != NULL)
+            {
+                strcat(cwd, "/");
+            }
+            else
+            {
+                perror("getcwd() error");
+            }
+
+            printf("--------------INSTRUCTION LIST--------------\n");
+            printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
+            printf("Please place your 'Color.txt' file at the following location: %s\n",cwd);
+            
             return 0;
         }
         else
@@ -231,7 +248,7 @@ char *rtrim(char *data)
     return data;
 }
 
-void readFromFile(const char *filename, node_t **mainHead)
+int readFromFile(const char *filename, node_t **mainHead)
 {
 
     FILE *file = fopen(filename, "r");
@@ -250,12 +267,12 @@ void readFromFile(const char *filename, node_t **mainHead)
 
     if (!file)
     {
-        perror("Error opening file");
+        printf("Unable to Open File : Use HELP Instruction\n");
+        return 0;
     }
 
     char line[1024];
-    fgets(line, sizeof(line), file);
-
+    
     while (fgets(line, sizeof(line), file))
     {
         // change this based on u want " " Space or "\t" for tab space in between
@@ -264,9 +281,7 @@ void readFromFile(const char *filename, node_t **mainHead)
 
         if (key && value)
         {
-
             int x = find_node(head, key);
-
             if (x == 0)
             {
                 tmp = create_new_node(rtrim(key), rtrim(value));
@@ -277,6 +292,11 @@ void readFromFile(const char *filename, node_t **mainHead)
     }
 
     fclose(file);
+    
+    return 1;
+    
+
+    
 }
 
 void saveFromFile(const char *filename, node_t **head)

@@ -27,7 +27,10 @@ int main(int argc, const char *argv[])
     char *split_user_input[MAX_USER_INPUT];
 
     // Print Welcome Message
-    printf("-------Welcome to EzDB-------\n");
+    printf("-------ICT 1002-------\n");
+   
+    
+    
 
     // Database Loop
 

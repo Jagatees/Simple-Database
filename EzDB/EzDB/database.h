@@ -23,7 +23,7 @@ int databaseLogic(char *inv[], int inc, node_t **head);
 char *rtrim(char *s);
 
 // Read From a TXT File and Load it into Cache (Linked List Node)
-void readFromFile(const char *filename, node_t **head);
+int readFromFile(const char *filename, node_t **head);
 
 // Save Data from Cache to TXT File
 void saveFromFile(const char *filenam, node_t **head);
