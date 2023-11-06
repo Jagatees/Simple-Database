@@ -36,7 +36,9 @@ struct DB db_instruction = {
     .HELP = "HELP",
 };
 
+
 int isOPEN = 0;
+
 
 // Handle Database instruction based on user input
 

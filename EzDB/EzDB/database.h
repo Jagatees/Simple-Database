@@ -15,6 +15,7 @@
 
 #define MAX_PATH_LEN 1024
 
+
 // Handle Database Login based on user_input
 int databaseLogic(char *inv[], int inc, node_t **head);
 
