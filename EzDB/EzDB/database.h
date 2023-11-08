@@ -16,20 +16,35 @@
 #define MAX_PATH_LEN 1024
 
 
-// Handle Database Login based on user_input
+
+//
+//  database.c
+//  EzDB
+//
+//  Created by Jagateesvaran on 25/10/23.
+//
+
+#include "database.h"
+
+
+void switch_state(const char* user_input);
+
 int databaseLogic(char *inv[], int inc, node_t **head);
 
-// Remove Trailling Whitespace from string
-char *rtrim(char *s);
+void handleOpenCommand(char *inv[], node_t **head);
+void handleShowAllCommand(char *inv[], int inc, node_t **head);
+void handleExitCommand(char *inv[]);
+void handleHelpCommand(DBState db_state);
+void handleInsertCommand(char *inv[], node_t **head);
+void handleQueryCommand(char *inv[], node_t **head);
+void handleUpdateCommand(char *inv[], node_t **head);
+void handleDeleteCommand(char *inv[], node_t **head);
+void handleSaveCommand(char *inv[], node_t **head);
 
-// Read From a TXT File and Load it into Cache (Linked List Node)
-int readFromFile(const char *filename, node_t **head);
+char *rtrim(char *data)
 
-// Save Data from Cache to TXT File
-void saveFromFile(const char *filenam, node_t **head);
-
-// States of Datbase
-void switch_state(const char* user_input);
+int readFromFile(const char *filename, node_t **mainHead);
+void saveFromFile(const char *filename, node_t **head);
 
 
 #endif /* database_h */

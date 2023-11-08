@@ -7,8 +7,6 @@
 
 #include "database.h"
 
-
-
 const int MAX_INSTRUCTION = 10;
 const char *FILE_EXTENSION = ".txt";
 const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
