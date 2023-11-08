@@ -34,14 +34,13 @@ int databaseLogic(char *inv[], int inc, node_t **head);
 void handleOpenCommand(char *inv[], node_t **head);
 void handleShowAllCommand(char *inv[], int inc, node_t **head);
 void handleExitCommand(char *inv[]);
-void handleHelpCommand(DBState db_state);
 void handleInsertCommand(char *inv[], node_t **head);
 void handleQueryCommand(char *inv[], node_t **head);
 void handleUpdateCommand(char *inv[], node_t **head);
 void handleDeleteCommand(char *inv[], node_t **head);
 void handleSaveCommand(char *inv[], node_t **head);
 
-char *rtrim(char *data)
+char *rtrim(char *data);
 
 int readFromFile(const char *filename, node_t **mainHead);
 void saveFromFile(const char *filename, node_t **head);
