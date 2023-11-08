@@ -28,4 +28,8 @@ int readFromFile(const char *filename, node_t **head);
 // Save Data from Cache to TXT File
 void saveFromFile(const char *filenam, node_t **head);
 
+// States of Datbase
+void switch_state(const char* user_input);
+
+
 #endif /* database_h */
