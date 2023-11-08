@@ -7,10 +7,58 @@
 
 #include "database.h"
 
+const int MAX_INSTRUCTION = 10;
+const char *FILE_EXTENSION = ".txt";
+const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
+const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
+    "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP",
+};
 
+typedef enum {
+    SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, UNKNOWN_COMMAND
+} CommandType;
+
+CommandType getCommandType(const char *user_input){
+    for (int i = 0; i < MAX_INSTRUCTION; i++) {
+            if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
+                return (CommandType)i;
+            }
+        }
+        return UNKNOWN_COMMAND;
+}
+
+
+
+typedef enum {
+    db_Close,
+    db_Open
+} DBState;
 
 DBState db_state = db_Close;
 
+
+// Handle Database instruction based on user input
+
+/*
+ When get user inpput
+ 
+ If input is blank
+    Is Open == true
+        instruction
+    Is Open == False
+        can not do instruction
+ 
+ Is input is Exit
+ Is input is Exit
+
+ */
+
+// Implement this to make nice
+// state machine
+// switch case
+// inspried by elson ntu, GOD, touch by his pressence
+// comment chuck
+// cacll the function with different args
 
 void switch_state(const char* user_input) {
     if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0)
@@ -331,13 +379,3 @@ void saveFromFile(const char *filename, node_t **head)
 
     fclose(file);
 }
-
-CommandType getCommandType(const char *user_input){
-    for (int i = 0; i < MAX_INSTRUCTION; i++) {
-            if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
-                return (CommandType)i;
-            }
-        }
-        return UNKNOWN_COMMAND;
-}
-
