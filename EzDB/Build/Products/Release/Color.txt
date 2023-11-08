@@ -1,7 +1,6 @@
 Key	Value
-Mango4 123
-Test3 test5425
-test2 test4
-test1 test1
-Yellow #FFFF00
 Mango 3.4
+Yellow #FFFF00
+test2 test4
+Test3 test5425
+Mango4 123
