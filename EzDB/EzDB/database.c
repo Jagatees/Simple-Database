@@ -1,30 +1,32 @@
 #include "database.h"
 
 
-
+// MAX Number of Instruction
 const int MAX_INSTRUCTION = 10;
+// message is unable to find file location
 const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
+// Array of string for instruction
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
     "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP",
 };
-
+// List of Enum of Instruction
 typedef enum {
     SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, UNKNOWN_COMMAND
-} CommandType;
+} InstructionEnum;
 
+// Enum of DB State
 typedef enum {
     db_Close,
     db_Open
 } DBState;
 
-// Init stat to close on start
+// Initalize DB State to Close on Start
 DBState db_state = db_Close;
 
 
 /**
  * @brief Switch between state db_open and db_close
- *
- * @param user_input String that holds the user input
+ * @param user_input Use to
  * @return void
  */
 void switch_state(const char* user_input) {
@@ -45,10 +47,10 @@ void switch_state(const char* user_input) {
  * @param user_input String that holds the user input
  * @return CommandType will return a enum state
  */
-CommandType getCommandType(const char *user_input){
+InstructionEnum getCommandType(const char *user_input){
     for (int i = 0; i < MAX_INSTRUCTION; i++) {
             if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
-                return (CommandType)i;
+                return (InstructionEnum)i;
             }
         }
         return UNKNOWN_COMMAND;
@@ -255,22 +257,22 @@ void handleSaveCommand(char *user_input[], node_t **head) {
 
 int databaseLogic(char *user_input[], int counter, node_t **head)
 {
-    CommandType cmdType;
+    InstructionEnum instructionType;
 
     if (user_input[0] == NULL) {
         printf("Empty Input\n");
         return 0;
     } else {
-        cmdType = getCommandType(user_input[0]);
+        instructionType = getCommandType(user_input[0]);
     }
 
     switch (db_state) {
         case db_Close:
-            if (cmdType == OPEN) {
+            if (instructionType == OPEN) {
                 handleOpenCommand(user_input, head);
-            } else if (cmdType == HELP) {
+            } else if (instructionType == HELP) {
                 handleHelpCommand(db_state);
-            } else if (cmdType == EXIT) {
+            } else if (instructionType == EXIT) {
                 handleExitCommand(user_input);
                 return 1;
             } else {
@@ -278,7 +280,7 @@ int databaseLogic(char *user_input[], int counter, node_t **head)
             }
             break;
         case db_Open:
-            switch (cmdType) {
+            switch (instructionType) {
                 case SHOW:
                     handleShowAllCommand(user_input, counter, head);
                     break;
