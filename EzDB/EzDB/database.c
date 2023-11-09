@@ -28,10 +28,10 @@ DBState db_state = db_Close;
  * @return void
  */
 void switch_state(const char* user_input) {
-    if (strcmp(user_input, DB_INSTRUCTION[SHOW]) == 0)
+    if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0)
     {
         db_state = db_Open;
-
+        
     } else if (strcmp(user_input, DB_INSTRUCTION[EXIT]) == 0) {
         db_state = db_Close;
     }
