@@ -1,5 +1,7 @@
 #include "database.h"
 
+
+
 const int MAX_INSTRUCTION = 10;
 const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
@@ -15,17 +17,18 @@ typedef enum {
     db_Open
 } DBState;
 
+// Init stat to close on start
 DBState db_state = db_Close;
 
 
 /**
- * @brief Allow user to switch between the two different state which is db_open or db_close
+ * @brief Switch between state db_open and db_close
  *
- * @param user_input String containing user input
+ * @param user_input String that holds the user input
  * @return void
  */
 void switch_state(const char* user_input) {
-    if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0)
+    if (strcmp(user_input, DB_INSTRUCTION[SHOW]) == 0)
     {
         db_state = db_Open;
 
@@ -35,11 +38,12 @@ void switch_state(const char* user_input) {
     
 }
 
+
 /**
- * @brief Use user input to return the instruction type the user is trying to excuted
+ * @brief Switch between state db_open and db_close
  *
- * @param user_input A string containing the user's input
- * @return CommandType An enum value representing the recognized command type.
+ * @param user_input String that holds the user input
+ * @return CommandType will return a enum state
  */
 CommandType getCommandType(const char *user_input){
     for (int i = 0; i < MAX_INSTRUCTION; i++) {
@@ -51,41 +55,46 @@ CommandType getCommandType(const char *user_input){
 }
 
 /**
- * @brief Handles the 'OPEN' command, it also find the current dir and append it to what teh user enter for the file name.
+ * @brief Handle the OPEN Instruction
+ * 1 : It will get the current file path of the folder where this code 
+ * 2 : It will append what the user type to the path above 
+ * 3 : Use that to search for the file
+ * 4 : go into the readFromFile(), and return 
+ * 5 : Switch the state machine to OPEN 
  *
- * @param inv A string containing the user's input
- * @param head A pointer to the head node of the linked list representing the database.
+ * @param user_input String that holds the user input
+ * @param head pass in the current head so we can update it if we make any changes to the node
  * @return void
  */
-void handleOpenCommand(char *inv[], node_t **head) {
+void handleOpenCommand(char *user_input[], node_t **head) {
     
     char cwd[1024];
     
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
         strcat(cwd, "/");
-        strcat(cwd, inv[1]);
+        strcat(cwd, user_input[1]);
     }
     else
     {
         perror("getcwd() error");
     }
 
-    if (strcmp(inv[1], "Color.txt") == 0 && readFromFile(cwd, head))
+    if (strcmp(user_input[1], "Color.txt") == 0 && readFromFile(cwd, head))
     {
-        printf("Save Key & Values into cahe from %s\n", inv[1]);
-        switch_state(inv[0]);
+        printf("Save Key & Values into cahe from %s\n", user_input[1]);
+        switch_state(user_input[0]);
     }
     else
     {
-        printf("Unable to find %s at location\n", inv[1]);
+        printf("Unable to find %s at location\n", user_input[1]);
     }
 }
 
 
-void handleShowAllCommand(char *inv[], int inc, node_t **head) {
+void handleShowAllCommand(char *user_input[], int counter, node_t **head) {
     
-    if (inc >= 2 && strcmp(inv[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(inv[1], DB_INSTRUCTION[ALL]) == 0)
+    if (counter >= 2 && strcmp(user_input[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(user_input[1], DB_INSTRUCTION[ALL]) == 0)
     {
         printf("There are in total %i records found: \n", list_node(*head));
         printlist(*head);
@@ -94,11 +103,11 @@ void handleShowAllCommand(char *inv[], int inc, node_t **head) {
 
 
 
-void handleExitCommand(char *inv[]) {
+void handleExitCommand(char *user_input[]) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[EXIT]) == 0) // DELETE INSTRUCTION
+    if (strcmp(user_input[0], DB_INSTRUCTION[EXIT]) == 0) // DELETE INSTRUCTION
     {
-        switch_state(inv[0]);
+        switch_state(user_input[0]);
         printf("Exit Database\n");
     }
 }
@@ -132,20 +141,20 @@ void handleHelpCommand(DBState db_state) {
 }
 
 
-void handleInsertCommand(char *inv[], node_t **head) {
+void handleInsertCommand(char *user_input[], node_t **head) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[INSERT]) == 0) {
-        int isfound = find_node(*head, inv[1]);
+    if (strcmp(user_input[0], DB_INSTRUCTION[INSERT]) == 0) {
+        int isfound = find_node(*head, user_input[1]);
    
         if (isfound == 1)
         {
-            printf("The record with Key=%s already exists in the database\n", inv[1]);
+            printf("The record with Key=%s already exists in the database\n", user_input[1]);
         }
         else if (isfound == 0)
         {
-            node_t *tmp = create_new_node(inv[1], inv[2]);
+            node_t *tmp = create_new_node(user_input[1], user_input[2]);
             insert_at_head(head, tmp);
-            printf("A new record of Key=%s Value=%s is successfully inserted\n", inv[1], inv[2]);
+            printf("A new record of Key=%s Value=%s is successfully inserted\n", user_input[1], user_input[2]);
         }
    
     }
@@ -153,19 +162,19 @@ void handleInsertCommand(char *inv[], node_t **head) {
 }
 
 
-void handleQueryCommand(char *inv[], node_t **head) {
+void handleQueryCommand(char *user_input[], node_t **head) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[QUERY]) == 0)
+    if (strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
     {
-        char *isfound = find_node_return_string(*head, inv[1]);
+        char *isfound = find_node_return_string(*head, user_input[1]);
    
         if (strcmp(isfound, "EMPTY") != 0)
         {
-            printf("A record of Key=%s, Value= %s is found in the database.\n", inv[1], isfound);
+            printf("A record of Key=%s, Value= %s is found in the database.\n", user_input[1], isfound);
         }
         else if (strcmp(isfound, "EMPTY") == 0)
         {
-            printf("There is no record with Key=%s found in the database\n", inv[1]);
+            printf("There is no record with Key=%s found in the database\n", user_input[1]);
         }
    
     }
@@ -173,21 +182,21 @@ void handleQueryCommand(char *inv[], node_t **head) {
 }
 
 
-void handleUpdateCommand(char *inv[], node_t **head) {
+void handleUpdateCommand(char *user_input[], node_t **head) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[UPDATE]) == 0)
+    if (strcmp(user_input[0], DB_INSTRUCTION[UPDATE]) == 0)
     {
    
-        int isfound = find_node(*head, inv[1]);
+        int isfound = find_node(*head, user_input[1]);
    
         if (isfound == 1)
         {
-            update_node(*head, inv[1], inv[2]);
-            printf("The value for the record of Key=%s is successfully updated.\n", inv[1]);
+            update_node(*head, user_input[1], user_input[2]);
+            printf("The value for the record of Key=%s is successfully updated.\n", user_input[1]);
         }
         else if (isfound == 0)
         {
-            printf("There is no record with Key=%s found in the database.\n", inv[1]);
+            printf("There is no record with Key=%s found in the database.\n", user_input[1]);
         }
    
     }
@@ -195,34 +204,28 @@ void handleUpdateCommand(char *inv[], node_t **head) {
 }
 
 
-void handleDeleteCommand(char *inv[], node_t **head) {
+void handleDeleteCommand(char *user_input[], node_t **head) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[DELETE]) == 0)
+    if (strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
     {
-        printf("The record of Key=%s is successfully deleted.\n", inv[1]);
-        delete_node(head, inv[1]);
+        printf("The record of Key=%s is successfully deleted.\n", user_input[1]);
+        delete_node(head, user_input[1]);
     }
     
 }
 
-/**
- * @brief Handles the 'SAVE' command, which writes the current state of the database to a file.
- *
- * @param inv An array of strings representing user input split into arguments.
- * @param head A pointer to the head node of the linked list representing the database.
- * @return void
- */
-void handleSaveCommand(char *inv[], node_t **head) {
+
+void handleSaveCommand(char *user_input[], node_t **head) {
     
-    if (strcmp(inv[0], DB_INSTRUCTION[SAVE]) == 0)
+    if (strcmp(user_input[0], DB_INSTRUCTION[SAVE]) == 0)
     {
-        printf("SAVE Data to this file %s\n", inv[1]);
+        printf("SAVE Data to this file %s\n", user_input[1]);
         
         char cwd[1024];
         if (getcwd(cwd, sizeof(cwd)) != NULL)
         {
             strcat(cwd, "/");
-            strcat(cwd, inv[1]);
+            strcat(cwd, user_input[1]);
         }
         else
         {
@@ -237,25 +240,25 @@ void handleSaveCommand(char *inv[], node_t **head) {
 
 
 
-int databaseLogic(char *inv[], int inc, node_t **head)
+int databaseLogic(char *user_input[], int counter, node_t **head)
 {
     CommandType cmdType;
 
-    if (inv[0] == NULL) {
+    if (user_input[0] == NULL) {
         printf("Empty Input\n");
         return 0;
     } else {
-        cmdType = getCommandType(inv[0]);
+        cmdType = getCommandType(user_input[0]);
     }
 
     switch (db_state) {
         case db_Close:
             if (cmdType == OPEN) {
-                handleOpenCommand(inv, head);
+                handleOpenCommand(user_input, head);
             } else if (cmdType == HELP) {
                 handleHelpCommand(db_state);
             } else if (cmdType == EXIT) {
-                handleExitCommand(inv);
+                handleExitCommand(user_input);
                 return 1;
             } else {
                 printf("Please Load in a .txt file first before entering into database\n");
@@ -264,29 +267,29 @@ int databaseLogic(char *inv[], int inc, node_t **head)
         case db_Open:
             switch (cmdType) {
                 case SHOW:
-                    handleShowAllCommand(inv, inc, head);
+                    handleShowAllCommand(user_input, counter, head);
                     break;
                 case EXIT:
-                    handleExitCommand(inv);
+                    handleExitCommand(user_input);
                     return 1;
                     break;
                 case INSERT:
-                    handleInsertCommand(inv, head);
+                    handleInsertCommand(user_input, head);
                     break;
                 case QUERY:
-                    handleQueryCommand(inv, head);
+                    handleQueryCommand(user_input, head);
                     break;
                 case HELP:
                     handleHelpCommand(db_state);
                     break;
                 case UPDATE:
-                    handleUpdateCommand(inv, head);
+                    handleUpdateCommand(user_input, head);
                     break;
                 case DELETE:
-                    handleDeleteCommand(inv, head);
+                    handleDeleteCommand(user_input, head);
                     break;
                 case SAVE:
-                    handleSaveCommand(inv, head);
+                    handleSaveCommand(user_input, head);
                     break;
                 default:
                     printf("Unknown command. Please type 'HELP' for the list of commands.\n");

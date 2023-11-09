@@ -29,20 +29,6 @@ int main(int argc, const char *argv[])
     // Print Welcome Message
     printf("-------ICT 1002-------\n");
    
-    
-    
-
-    // Database Loop
-
-    // FLOW
-    // User enter = INSERT Mango 4.3
-    // userinput[0] = I
-    // userinput[1] = N
-    // etc
-    // split_user_input[0] = INSERT , counter++
-    // split_user_input[1] = Mango , counter++
-    // split_user_input[2] = 4.3 . counter++
-    // send the split , counter and pointer to head to database
 
     do
     {
