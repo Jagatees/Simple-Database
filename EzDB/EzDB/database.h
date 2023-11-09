@@ -13,24 +13,13 @@
 // Include Custom Header Files
 #include "j_node.h"
 
-#define MAX_PATH_LEN 1024
-
-
-
-//
-//  database.c
-//  EzDB
-//
-//  Created by Jagateesvaran on 25/10/23.
-//
-
-#include "database.h"
-
-
+// Handle the Switchin of OPEN & Close State
 void switch_state(const char* user_input);
 
+// Handle the logic of the database and where which instruction go to
 int databaseLogic(char *inv[], int inc, node_t **head);
 
+// Different type of instruction
 void handleOpenCommand(char *inv[], node_t **head);
 void handleShowAllCommand(char *inv[], int inc, node_t **head);
 void handleExitCommand(char *inv[]);
@@ -40,8 +29,10 @@ void handleUpdateCommand(char *inv[], node_t **head);
 void handleDeleteCommand(char *inv[], node_t **head);
 void handleSaveCommand(char *inv[], node_t **head);
 
+// Remove char from word
 char *rtrim(char *data);
 
+// Read and Write into Txt File
 int readFromFile(const char *filename, node_t **mainHead);
 void saveFromFile(const char *filename, node_t **head);
 

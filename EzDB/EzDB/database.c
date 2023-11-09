@@ -1,14 +1,6 @@
-//
-//  database.c
-//  EzDB
-//
-//  Created by Jagateesvaran on 25/10/23.
-//
-
 #include "database.h"
 
 const int MAX_INSTRUCTION = 10;
-const char *FILE_EXTENSION = ".txt";
 const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
     "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP",
@@ -18,17 +10,6 @@ typedef enum {
     SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, UNKNOWN_COMMAND
 } CommandType;
 
-CommandType getCommandType(const char *user_input){
-    for (int i = 0; i < MAX_INSTRUCTION; i++) {
-            if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
-                return (CommandType)i;
-            }
-        }
-        return UNKNOWN_COMMAND;
-}
-
-
-
 typedef enum {
     db_Close,
     db_Open
@@ -37,29 +18,12 @@ typedef enum {
 DBState db_state = db_Close;
 
 
-// Handle Database instruction based on user input
-
-/*
- When get user inpput
- 
- If input is blank
-    Is Open == true
-        instruction
-    Is Open == False
-        can not do instruction
- 
- Is input is Exit
- Is input is Exit
-
+/**
+ * @brief Allow user to switch between the two different state which is db_open or db_close
+ *
+ * @param user_input String containing user input
+ * @return void
  */
-
-// Implement this to make nice
-// state machine
-// switch case
-// inspried by elson ntu, GOD, touch by his pressence
-// comment chuck
-// cacll the function with different args
-
 void switch_state(const char* user_input) {
     if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0)
     {
@@ -71,9 +35,31 @@ void switch_state(const char* user_input) {
     
 }
 
+/**
+ * @brief Use user input to return the instruction type the user is trying to excuted
+ *
+ * @param user_input A string containing the user's input
+ * @return CommandType An enum value representing the recognized command type.
+ */
+CommandType getCommandType(const char *user_input){
+    for (int i = 0; i < MAX_INSTRUCTION; i++) {
+            if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
+                return (CommandType)i;
+            }
+        }
+        return UNKNOWN_COMMAND;
+}
+
+/**
+ * @brief Handles the 'OPEN' command, it also find the current dir and append it to what teh user enter for the file name.
+ *
+ * @param inv A string containing the user's input
+ * @param head A pointer to the head node of the linked list representing the database.
+ * @return void
+ */
 void handleOpenCommand(char *inv[], node_t **head) {
     
-    char cwd[MAX_PATH_LEN];
+    char cwd[1024];
     
     if (getcwd(cwd, sizeof(cwd)) != NULL)
     {
@@ -96,6 +82,7 @@ void handleOpenCommand(char *inv[], node_t **head) {
     }
 }
 
+
 void handleShowAllCommand(char *inv[], int inc, node_t **head) {
     
     if (inc >= 2 && strcmp(inv[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(inv[1], DB_INSTRUCTION[ALL]) == 0)
@@ -104,6 +91,8 @@ void handleShowAllCommand(char *inv[], int inc, node_t **head) {
         printlist(*head);
     }
 }
+
+
 
 void handleExitCommand(char *inv[]) {
     
@@ -114,11 +103,12 @@ void handleExitCommand(char *inv[]) {
     }
 }
 
+
 void handleHelpCommand(DBState db_state) {
     
     if (db_state == db_Close) {
         
-        char cwd[MAX_PATH_LEN];
+        char cwd[1024];
         if (getcwd(cwd, sizeof(cwd)) != NULL)
         {
             strcat(cwd, "/");
@@ -141,6 +131,7 @@ void handleHelpCommand(DBState db_state) {
     
 }
 
+
 void handleInsertCommand(char *inv[], node_t **head) {
     
     if (strcmp(inv[0], DB_INSTRUCTION[INSERT]) == 0) {
@@ -161,6 +152,7 @@ void handleInsertCommand(char *inv[], node_t **head) {
     
 }
 
+
 void handleQueryCommand(char *inv[], node_t **head) {
     
     if (strcmp(inv[0], DB_INSTRUCTION[QUERY]) == 0)
@@ -179,6 +171,7 @@ void handleQueryCommand(char *inv[], node_t **head) {
     }
     
 }
+
 
 void handleUpdateCommand(char *inv[], node_t **head) {
     
@@ -201,6 +194,7 @@ void handleUpdateCommand(char *inv[], node_t **head) {
     
 }
 
+
 void handleDeleteCommand(char *inv[], node_t **head) {
     
     if (strcmp(inv[0], DB_INSTRUCTION[DELETE]) == 0)
@@ -211,13 +205,20 @@ void handleDeleteCommand(char *inv[], node_t **head) {
     
 }
 
+/**
+ * @brief Handles the 'SAVE' command, which writes the current state of the database to a file.
+ *
+ * @param inv An array of strings representing user input split into arguments.
+ * @param head A pointer to the head node of the linked list representing the database.
+ * @return void
+ */
 void handleSaveCommand(char *inv[], node_t **head) {
     
     if (strcmp(inv[0], DB_INSTRUCTION[SAVE]) == 0)
     {
         printf("SAVE Data to this file %s\n", inv[1]);
         
-        char cwd[MAX_PATH_LEN];
+        char cwd[1024];
         if (getcwd(cwd, sizeof(cwd)) != NULL)
         {
             strcat(cwd, "/");
@@ -298,6 +299,7 @@ int databaseLogic(char *inv[], int inc, node_t **head)
     
 }
 
+
 char *rtrim(char *data)
 {
     int lenght = (unsigned)strlen(data);
@@ -310,6 +312,7 @@ char *rtrim(char *data)
     data[index + 1] = '\0';
     return data;
 }
+
 
 int readFromFile(const char *filename, node_t **mainHead)
 {
