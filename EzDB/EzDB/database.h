@@ -13,7 +13,7 @@
 // Include Custom Header Files
 #include "j_node.h"
 
-// Handle the Switchin of OPEN & Close State
+// Handle the switch status of OPEN & Close State
 void switch_state(const char* user_input);
 
 // Handle the logic of the database and where which instruction go to

@@ -1,5 +1,2 @@
 Key	Value
-Test3 test5425
-test2 test4
-test1 test1
-Yellow #FFFF00
+Yellow Test

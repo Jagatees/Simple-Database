@@ -12,7 +12,7 @@
 
 int main(int argc, const char *argv[])
 {
-
+    
     // init linked head to null on start
     node_t *head = NULL;
 

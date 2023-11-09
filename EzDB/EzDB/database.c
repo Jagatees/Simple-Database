@@ -170,7 +170,7 @@ void handleQueryCommand(char *user_input[], node_t **head) {
    
         if (strcmp(isfound, "EMPTY") != 0)
         {
-            printf("A record of Key=%s, Value= %s is found in the database.\n", user_input[1], isfound);
+            printf("A record of Key=%s, Value=%s is found in the database.\n", user_input[1], isfound);
         }
         else if (strcmp(isfound, "EMPTY") == 0)
         {
@@ -208,8 +208,21 @@ void handleDeleteCommand(char *user_input[], node_t **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
     {
-        printf("The record of Key=%s is successfully deleted.\n", user_input[1]);
-        delete_node(head, user_input[1]);
+        
+        int isfound = find_node(*head, user_input[1]);
+        
+        if (isfound == 1)
+        {
+            printf("The record of Key=%s is successfully deleted.\n", user_input[1]);
+            delete_node(head, user_input[1]);
+        }
+        else if (isfound == 0)
+        {
+            printf("There is no record with Key=%s found in the database.\n", user_input[1]);
+        }
+        
+        
+       
     }
     
 }
