@@ -1,14 +1,7 @@
-//
-//  j_node.c
-//  EzDB
-//
-//  Created by Jagateesvaran on 28/10/23.
-//
-
 #include "j_node.h"
 
 // CREATE A NODE
-node_t *create_new_node(char *key, char *value)
+node_t *createNode(char *key, char *value)
 {
     node_t *result = malloc(sizeof(node_t));
     strcpy(result->value, value);
@@ -17,7 +10,7 @@ node_t *create_new_node(char *key, char *value)
 }
 
 // INSERT NEW NODE INTO NODE LIST
-node_t *insert_at_head(node_t **head, node_t *node_to_insert)
+node_t *insertHead(node_t **head, node_t *node_to_insert)
 {
     node_to_insert->next = *head;
     *head = node_to_insert;
@@ -25,7 +18,7 @@ node_t *insert_at_head(node_t **head, node_t *node_to_insert)
 }
 
 // Show All - (Print)
-void printlist(node_t *head)
+void printNode(node_t *head)
 {
     node_t *temporary = head;
 
@@ -36,7 +29,7 @@ void printlist(node_t *head)
     }
 }
 
-int list_node(node_t *head)
+int lenNode(node_t *head)
 {
 
     int counter = 0;
@@ -52,7 +45,7 @@ int list_node(node_t *head)
 }
 
 // Search Query
-int find_node(node_t *head, char *key)
+int findNode(node_t *head, char *key)
 {
     node_t *tmp = head;
     while (tmp != NULL)
@@ -66,7 +59,7 @@ int find_node(node_t *head, char *key)
     return 0;
 }
 
-char *find_node_return_string(node_t *head, char *key)
+char *findNodereturnString(node_t *head, char *key)
 {
     node_t *tmp = head;
     while (tmp != NULL)
@@ -81,7 +74,7 @@ char *find_node_return_string(node_t *head, char *key)
 }
 
 // delete node
-void delete_node(node_t **head, char *keys)
+void deleteNode(node_t **head, char *keys)
 {
     node_t *previous = *head;
     node_t *current = *head;
@@ -114,7 +107,7 @@ void delete_node(node_t **head, char *keys)
 }
 
 // UPDATE
-int update_node(node_t *head, char *key, char *newvalue)
+int updateNode(node_t *head, char *key, char *newvalue)
 {
     node_t *tmp = head;
     while (tmp != NULL)

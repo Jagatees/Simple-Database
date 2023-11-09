@@ -12,28 +12,25 @@
 
 int main(int argc, const char *argv[])
 {
-    
-    // init linked head to null on start
+    // Print SIT Declaration
+    SIT_DECLARATION();
+   
+    // Init Head node to NULL on Start
     node_t *head = NULL;
-
-    // Store user input
-    char user_input[MAX_USER_INPUT];
-
-    // Database Loop (think of it like a game loop) , 0 == still in database , 1 == will exit database
+    
+    // Database Loop, 0 == still in database , 1 == will exit database
     int inDatabase = 0;
 
-    // Split User Input
+    // User Input & Split User Input & Counter is Length of User input
+    char user_input[MAX_USER_INPUT];
     int counter = 0;
     char *split_user_input[MAX_USER_INPUT];
 
-    // Print Welcome Message
-    printf("-------ICT 1002-------\n");
-   
-
+    // Database Loop
     do
     {
         // Print Input Line
-        printf("Enter INSTRUCTION :");
+        printf("ENTER COMMAND :");
 
         // store user input
         fgets(user_input, MAX_USER_INPUT, stdin);

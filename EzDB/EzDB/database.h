@@ -13,28 +13,32 @@
 // Include Custom Header Files
 #include "j_node.h"
 
-// Handle the switch status of OPEN & Close State
-void switch_state(const char* user_input);
+// Switch State db_open to db_close
+void switchState(const char* user_input);
 
-// Handle the logic of the database and where which instruction go to
-int databaseLogic(char *user_input[], int inc, node_t **head);
+// Instruction Function
+void openInstruction(char *user_input[], node_t **head);
+void showAllInstruction(char *user_input[], int counter, node_t **head);
+void exitInstruction(char *user_input[]);
+void insertInstruction(char *user_input[], node_t **head);
+void queryInstruction(char *user_input[], node_t **head);
+void updateInstruction(char *user_input[], node_t **head);
+void deleteInstruction(char *user_input[], node_t **head);
+void saveInstruction(char *user_input[], node_t **head);
 
-// Different type of instruction
-void handleOpenCommand(char *user_input[], node_t **head);
-void handleShowAllCommand(char *user_input[], int counter, node_t **head);
-void handleExitCommand(char *user_input[]);
-void handleInsertCommand(char *user_input[], node_t **head);
-void handleQueryCommand(char *user_input[], node_t **head);
-void handleUpdateCommand(char *user_input[], node_t **head);
-void handleDeleteCommand(char *user_input[], node_t **head);
-void handleSaveCommand(char *user_input[], node_t **head);
 
-// Remove char from word
-char *rtrim(char *data);
+// Database Loop
+int databaseLogic(char *user_input[], int counter, node_t **head);
 
-// Read and Write into Txt File
+
+// Trim White space
+char *rtrim(char *user_input);
+
+
+// Read / Write .txt File
 int readFromFile(const char *filename, node_t **mainHead);
 void saveFromFile(const char *filename, node_t **head);
+
 
 
 #endif /* database_h */

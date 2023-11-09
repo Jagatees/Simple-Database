@@ -22,13 +22,13 @@ struct node
 
 typedef struct node node_t;
 
-node_t *create_new_node(char *key, char *value);
-int list_node(node_t *head);
-int find_node(node_t *head, char *key);
-char *find_node_return_string(node_t *head, char *key);
-void printlist(node_t *head);
-node_t *insert_at_head(node_t **head, node_t *node_to_insert);
-void delete_node(node_t **head, char *keys);
-int update_node(node_t *head, char *key, char *newvalue);
+node_t *createNode(char *key, char *value);
+node_t *insertHead(node_t **head, node_t *node_to_insert);
+void printNode(node_t *head);
+int lenNode(node_t *head);
+int findNode(node_t *head, char *key);
+char *findNodereturnString(node_t *head, char *key);
+void deleteNode(node_t **head, char *keys);
+int updateNode(node_t *head, char *key, char *newvalue);
 
 #endif /* j_node_h */
