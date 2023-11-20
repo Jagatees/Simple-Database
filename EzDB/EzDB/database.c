@@ -3,8 +3,7 @@
 
 // MAX Number of Instruction
 const int MAX_INSTRUCTION = 10;
-// message is unable to find file location
-const char *FILE_NOT_FOUND = "Unable to find %s at location\n";
+const char *INVAILD_INSTRUCTION = "Unknown command. Please type 'HELP' for the list of commands.\n";
 // Array of string for instruction
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
     "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP",
@@ -16,12 +15,12 @@ typedef enum {
 
 // Enum of DB State
 typedef enum {
-    db_Close,
-    db_Open
+    DB_CLOSE,
+    DB_OPEN
 } DBState;
 
 // Initalize DB State to Close on Start
-DBState db_state = db_Close;
+DBState db_State = DB_CLOSE;
 
 
 /**
@@ -32,9 +31,9 @@ DBState db_state = db_Close;
  */
 void switchState(const char* user_input) {
     if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0) {
-        db_state = db_Open;
+        db_State = DB_OPEN;
     } else if (strcmp(user_input, DB_INSTRUCTION[EXIT]) == 0) {
-        db_state = db_Close;
+        db_State = DB_CLOSE;
     }
     
 }
@@ -62,7 +61,7 @@ InstructionEnum getInstruction(const char *user_input){
  * @param head  node pointing to the head
  * @return void
  */
-void openInstruction(char *user_input[], node_t **head) {
+void openInstruction(char *user_input[], KeyValueNode **head) {
     
     char cwd[1024];
     
@@ -95,7 +94,7 @@ void openInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-void showAllInstruction(char *user_input[], int counter, node_t **head) {
+void showAllInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
     if (counter >= 2 && strcmp(user_input[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(user_input[1], DB_INSTRUCTION[ALL]) == 0)
     {
@@ -128,7 +127,7 @@ void exitInstruction(char *user_input[]) {
  */
 void helpInstruction(DBState db_state) {
     
-    if (db_state == db_Close) {
+    if (db_State == DB_CLOSE) {
         
         char cwd[1024];
         if (getcwd(cwd, sizeof(cwd)) != NULL)
@@ -143,10 +142,10 @@ void helpInstruction(DBState db_state) {
         printf("--------------INSTRUCTION LIST--------------\n");
         printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
         printf("Please place your 'Color.txt' file at the following location: %s\n",cwd);
-        printf("Exit :  Exit the EXE\n");
+        printf("EXIT :  EXIT the program\n");
 
         
-    } else if (db_state == db_Open){
+    } else if (db_State == DB_OPEN){
         
         printf("--------------INSTRUCTION LIST--------------\n");
         printf("SHOW ALL: Display all entries in the table.\n");
@@ -168,7 +167,7 @@ void helpInstruction(DBState db_state) {
  * @param head  node pointing to the head
  * @return void
  */
-void insertInstruction(char *user_input[], node_t **head) {
+void insertInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[INSERT]) == 0) {
         int isfound = findNode(*head, user_input[1]);
@@ -179,7 +178,7 @@ void insertInstruction(char *user_input[], node_t **head) {
         }
         else if (isfound == 0)
         {
-            node_t *tmp = createNode(user_input[1], user_input[2]);
+            KeyValueNode *tmp = createNode(user_input[1], user_input[2]);
             insertHead(head, tmp);
             printf("A new record of Key=%s Value=%s is successfully inserted\n", user_input[1], user_input[2]);
         }
@@ -195,7 +194,7 @@ void insertInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-void queryInstruction(char *user_input[], node_t **head) {
+void queryInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
     {
@@ -221,7 +220,7 @@ void queryInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-void updateInstruction(char *user_input[], node_t **head) {
+void updateInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[UPDATE]) == 0)
     {
@@ -249,7 +248,7 @@ void updateInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-void deleteInstruction(char *user_input[], node_t **head) {
+void deleteInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
     {
@@ -279,7 +278,7 @@ void deleteInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-void saveInstruction(char *user_input[], node_t **head) {
+void saveInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[SAVE]) == 0)
     {
@@ -311,7 +310,7 @@ void saveInstruction(char *user_input[], node_t **head) {
  * @param head  node pointing to the head
  * @return void
  */
-int databaseLogic(char *user_input[], int counter, node_t **head)
+int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
 {
     InstructionEnum instructionType;
 
@@ -322,20 +321,20 @@ int databaseLogic(char *user_input[], int counter, node_t **head)
         instructionType = getInstruction(user_input[0]);
     }
 
-    switch (db_state) {
-        case db_Close:
+    switch (db_State) {
+        case DB_CLOSE:
             if (instructionType == OPEN) {
                 openInstruction(user_input, head);
             } else if (instructionType == HELP) {
-                helpInstruction(db_state);
+                helpInstruction(db_State);
             } else if (instructionType == EXIT) {
                 exitInstruction(user_input);
                 return 1;
             } else {
-                printf("Please Load in a .txt file first before entering into database\n");
+                printf(INVAILD_INSTRUCTION);
             }
             break;
-        case db_Open:
+        case DB_OPEN:
             switch (instructionType) {
                 case SHOW:
                     showAllInstruction(user_input, counter, head);
@@ -351,7 +350,7 @@ int databaseLogic(char *user_input[], int counter, node_t **head)
                     queryInstruction(user_input, head);
                     break;
                 case HELP:
-                    helpInstruction(db_state);
+                    helpInstruction(db_State);
                     break;
                 case UPDATE:
                     updateInstruction(user_input, head);
@@ -363,7 +362,7 @@ int databaseLogic(char *user_input[], int counter, node_t **head)
                     saveInstruction(user_input, head);
                     break;
                 default:
-                    printf("Unknown command. Please type 'HELP' for the list of commands.\n");
+                    printf(INVAILD_INSTRUCTION);
                     break;
             }
             break;
@@ -399,13 +398,13 @@ char *rtrim(char *user_input)
  * @param filename Take in File Name
  * @return int 1 or 0 whether it successed or not
  */
-int readFromFile(const char *filename, node_t **mainHead)
+int readFromFile(const char *filename, KeyValueNode **mainHead)
 {
 
     FILE *file = fopen(filename, "r");
 
-    node_t *head;
-    node_t *tmp;
+    KeyValueNode *head;
+    KeyValueNode *tmp;
 
     if (*mainHead != NULL)
     {
@@ -457,10 +456,10 @@ int readFromFile(const char *filename, node_t **mainHead)
  * @param head  node pointing to the head
  * @return int 1 or 0 whether it successed or not
  */
-void saveFromFile(const char *filename, node_t **head)
+void saveFromFile(const char *filename, KeyValueNode **head)
 {
 
-    node_t *temporary = *head;
+    KeyValueNode *temporary = *head;
 
     FILE *file = fopen(filename, "w");
 

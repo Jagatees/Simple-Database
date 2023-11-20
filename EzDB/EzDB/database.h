@@ -11,34 +11,30 @@
 #include <string.h>
 
 // Include Custom Header Files
-#include "j_node.h"
+#include "databaseNode.h"
 
 // Switch State db_open to db_close
 void switchState(const char* user_input);
 
 // Instruction Function
-void openInstruction(char *user_input[], node_t **head);
-void showAllInstruction(char *user_input[], int counter, node_t **head);
+void openInstruction(char *user_input[], KeyValueNode **head);
+void showAllInstruction(char *user_input[], int counter, KeyValueNode **head);
 void exitInstruction(char *user_input[]);
-void insertInstruction(char *user_input[], node_t **head);
-void queryInstruction(char *user_input[], node_t **head);
-void updateInstruction(char *user_input[], node_t **head);
-void deleteInstruction(char *user_input[], node_t **head);
-void saveInstruction(char *user_input[], node_t **head);
-
+void insertInstruction(char *user_input[], KeyValueNode **head);
+void queryInstruction(char *user_input[], KeyValueNode **head);
+void updateInstruction(char *user_input[], KeyValueNode **head);
+void deleteInstruction(char *user_input[], KeyValueNode **head);
+void saveInstruction(char *user_input[], KeyValueNode **head);
 
 // Database Loop
-int databaseLogic(char *user_input[], int counter, node_t **head);
-
+int databaseLogic(char *user_input[], int counter, KeyValueNode **head);
 
 // Trim White space
 char *rtrim(char *user_input);
 
-
 // Read / Write .txt File
-int readFromFile(const char *filename, node_t **mainHead);
-void saveFromFile(const char *filename, node_t **head);
-
+int readFromFile(const char *filename, KeyValueNode **mainHead);
+void saveFromFile(const char *filename, KeyValueNode **head);
 
 
 #endif /* database_h */
