@@ -1,8 +1,5 @@
 Key	Value
-Red #123253
-Brown #A52A2A
-Pink #FFC0CB
-Purple #800080
-Orange #FFA500
-Yellow #FFFF00
-Yellow2 #FFFF10
+etest asdad
+mango 123
+Test123 123
+test123 asdasd

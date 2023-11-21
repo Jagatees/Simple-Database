@@ -23,16 +23,13 @@ KeyValueNode *insertHead(KeyValueNode **head, KeyValueNode *node_to_insert)
 void printNode(KeyValueNode *head)
 {
     KeyValueNode *temporary = head;
-    
-    // Base case
-    if (temporary == NULL)
-    return;
- 
-    // print the list after head node
-    printNode(temporary->next);
- 
-    // After everything else is printed, print head
-    printf("%s %s \n", temporary->key, temporary->value);
+
+    // version older
+    while (temporary != NULL)
+    {
+        printf("%s %s \n", temporary->key, temporary->value);
+        temporary = temporary->next;
+    }
 }
 
 int lenNode(KeyValueNode *head)

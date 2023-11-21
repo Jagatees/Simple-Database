@@ -1,8 +1,0 @@
-Key	Value
-Red #123253
-Brown #A52A2A
-Pink #FFC0CB
-Purple #800080
-Orange #FFA500
-Yellow #FFFF00
-Yellow2 #FFFF10

@@ -427,12 +427,21 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
         return 0;
     }
 
-    char line[1024];
+    char line[1024][1024];
+    int countPage = 0;
     
-    while (fgets(line, sizeof(line), file))
+    // Read lines from the file into the lines array
+    while (fgets(line[countPage], sizeof(line[0]), file))
+    {
+        countPage++;
+    }
+    
+    fclose(file);
+    
+    for (int i = countPage - 1; i >= 0; i--)
     {
         // change this based on u want " " Space or "\t" for tab space in between
-        char *key = strtok(line, " ");
+        char *key = strtok(line[i], " ");
         char *value = strtok(NULL, " ");
 
         if (key && value)
@@ -447,12 +456,8 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
         }
     }
 
-    fclose(file);
     
     return 1;
-    
-
-    
 }
 
 /**
@@ -464,7 +469,6 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
  */
 void saveFromFile(const char *filename, KeyValueNode **head)
 {
-
     KeyValueNode *temporary = *head;
 
     FILE *file = fopen(filename, "w");
