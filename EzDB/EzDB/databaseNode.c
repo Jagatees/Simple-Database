@@ -17,16 +17,22 @@ KeyValueNode *insertHead(KeyValueNode **head, KeyValueNode *node_to_insert)
     return node_to_insert;
 }
 
+
+
 // Show All - (Print)
 void printNode(KeyValueNode *head)
 {
     KeyValueNode *temporary = head;
-
-    while (temporary != NULL)
-    {
-        printf("%s %s \n", temporary->key, temporary->value);
-        temporary = temporary->next;
-    }
+    
+    // Base case
+    if (temporary == NULL)
+    return;
+ 
+    // print the list after head node
+    printNode(temporary->next);
+ 
+    // After everything else is printed, print head
+    printf("%s %s \n", temporary->key, temporary->value);
 }
 
 int lenNode(KeyValueNode *head)

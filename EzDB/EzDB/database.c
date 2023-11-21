@@ -2,15 +2,15 @@
 
 
 // MAX Number of Instruction
-const int MAX_INSTRUCTION = 10;
+const int MAX_INSTRUCTION = 11;
 const char *INVAILD_INSTRUCTION = "Unknown command. Please type 'HELP' for the list of commands.\n";
 // Array of string for instruction
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
-    "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP",
+    "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP", "BACK",
 };
 // List of Enum of Instruction
 typedef enum {
-    SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, UNKNOWN_COMMAND
+    SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, BACK, UNKNOWN_COMMAND
 } InstructionEnum;
 
 // Enum of DB State
@@ -154,6 +154,7 @@ void helpInstruction(DBState db_state) {
         printf("UPDATE [Key] [Value]: Modify the value associated with the given key.\n");
         printf("DELETE [Key]: Remove the entry associated with the specified key from the table.\n");
         printf("SAVE [filename.txt]: Save the current table data to a text file.\n");
+        printf("BACK : Goes Back to Previous Page.\n");
         printf("Exit: Terminate the program.\n");
 
     }
@@ -360,6 +361,9 @@ int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
                     break;
                 case SAVE:
                     saveInstruction(user_input, head);
+                    break;
+                case BACK:
+                    db_State = DB_CLOSE;
                     break;
                 default:
                     printf(INVAILD_INSTRUCTION);
