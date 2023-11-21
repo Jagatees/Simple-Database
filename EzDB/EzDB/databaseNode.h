@@ -20,7 +20,7 @@ KeyValueNode *insertHead(KeyValueNode **head, KeyValueNode *node_to_insert);
 void printNode(KeyValueNode *head);
 int lenNode(KeyValueNode *head);
 int findNode(KeyValueNode *head, char *key);
-char *findNodereturnString(KeyValueNode *head, char *key);
+char *findNodeKey(KeyValueNode *head, char *key);
 void deleteNode(KeyValueNode **head, char *keys);
 int updateNode(KeyValueNode *head, char *key, char *newvalue);
 

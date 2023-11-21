@@ -127,7 +127,7 @@ void queryInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
     {
-        char *isfound = findNodereturnString(*head, user_input[1]);
+        char *isfound = findNodeKey(*head, user_input[1]);
    
         if (strcmp(isfound, "EMPTY") != 0)
         {
@@ -198,13 +198,13 @@ char* getWorkingDirectory(char* user_input){
     }
     else
     {
-        return "getcwd() error";
+        return "Unable to get Working Directory Path";
     }
     
     
 }
 
-char* printWorkingDirectory(){
+char* printWorkingDirectory(void){
     
     char cwd[1024];
     if (getcwd(cwd, sizeof(cwd)) != NULL)
@@ -296,7 +296,7 @@ int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
     
 }
 
-char *rtrim(char *user_input)
+char *removeSpace(char *user_input)
 {
     int lenght = (unsigned)strlen(user_input);
 
@@ -354,7 +354,7 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
             int x = findNode(head, key);
             if (x == 0)
             {
-                tmp = createNode(rtrim(key), rtrim(value));
+                tmp = createNode(removeSpace(key), removeSpace(value));
                 head = insertHead(&head, tmp);
                 *mainHead = head;
             }

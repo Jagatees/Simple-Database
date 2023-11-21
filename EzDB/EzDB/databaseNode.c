@@ -58,7 +58,7 @@ int findNode(KeyValueNode *head, char *key)
     return 0;
 }
 
-char *findNodereturnString(KeyValueNode *head, char *key)
+char *findNodeKey(KeyValueNode *head, char *key)
 {
     KeyValueNode *tmp = head;
     while (tmp != NULL)
