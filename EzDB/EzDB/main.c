@@ -14,7 +14,6 @@ int main(int argc, const char *argv[])
 {
     PRINT_SIT_DECLARATION();
    
-    // Init Head node to NULL on Start
     KeyValueNode *head = NULL;
     
     // Database Loop, 0 == still in database , 1 == will exit database
@@ -28,25 +27,19 @@ int main(int argc, const char *argv[])
     // Database Loop
     do
     {
-        // Print Input Line
         printf("ENTER COMMAND :");
 
-        // store user input
         fgets(user_input, MAX_USER_INPUT, stdin);
 
-        // init counter to zero
         counter = 0;
-        // store user input in a split format
         split_user_input[counter] = strtok(user_input, characters);
 
-        // Split String - until reach null mean end of user input
         while (split_user_input[counter] != NULL)
         {
             counter++;
             split_user_input[counter] = strtok(NULL, characters);
         }
 
-        // init database logic
         inDatabase = databaseLogic(split_user_input, counter, &head);
 
     } while (!inDatabase);

@@ -243,14 +243,6 @@ void saveInstruction(char *user_input[], KeyValueNode **head) {
 }
 
 
-/**
- * @brief Switch Case in between db_states and db_instruciton
- *
- * @param user_input String that holds the user input
- * @param counter length of user_input
- * @param head  node pointing to the head
- * @return void
- */
 int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
 {
     InstructionEnum instructionType;
@@ -316,12 +308,6 @@ int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
     
 }
 
-/**
- * @brief Remove the space in the data
- *
- * @param user_input String that holds the user input
- * @return char*
- */
 char *rtrim(char *user_input)
 {
     int lenght = (unsigned)strlen(user_input);
