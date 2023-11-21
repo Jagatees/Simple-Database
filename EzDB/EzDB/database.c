@@ -321,13 +321,6 @@ char *rtrim(char *user_input)
     return user_input;
 }
 
-/**
- * @brief Read Text File with .txt after name Ex, XXX.txt
- *
- * @param mainHead  node pointing to the head
- * @param filename Take in File Name
- * @return int 1 or 0 whether it successed or not
- */
 int readFromFile(const char *filename, KeyValueNode **mainHead)
 {
 
