@@ -39,20 +39,8 @@ InstructionEnum getInstruction(const char *user_input){
 
 
 void openInstruction(char *user_input[], KeyValueNode **head) {
-    
-    char cwd[1024];
-    
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-        strcat(cwd, "/");
-        strcat(cwd, user_input[1]);
-    }
-    else
-    {
-        perror("getcwd() error");
-    }
 
-    if (readFromFile(cwd, head))
+    if (readFromFile(getWorkingDirectory(user_input[1]), head))
     {
         printf("Save Key & Values into cahe from %s\n", user_input[1]);
         switchState(user_input[0]);
