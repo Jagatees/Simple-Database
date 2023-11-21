@@ -1,34 +1,23 @@
 #include "database.h"
 
 
-// MAX Number of Instruction
 const int MAX_INSTRUCTION = 11;
 const char *INVAILD_INSTRUCTION = "Unknown command. Please type 'HELP' for the list of commands.\n";
-// Array of string for instruction
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
     "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP", "BACK",
 };
-// List of Enum of Instruction
+
 typedef enum {
     SHOW, ALL, INSERT, QUERY, UPDATE, DELETE, OPEN, SAVE, EXIT, HELP, BACK, UNKNOWN_COMMAND
 } InstructionEnum;
 
-// Enum of DB State
 typedef enum {
     DB_CLOSE,
     DB_OPEN
 } DBState;
 
-// Initalize DB State to Close on Start
 DBState db_State = DB_CLOSE;
 
-
-/**
- * @brief Used to switch between the two different states for this database which are db_Open & db_Close
- *
- * @param user_input String that holds the user input
- * @return Void
- */
 void switchState(const char* user_input) {
     if (strcmp(user_input, DB_INSTRUCTION[OPEN]) == 0) {
         db_State = DB_OPEN;
@@ -39,12 +28,6 @@ void switchState(const char* user_input) {
 }
 
 
-/**
- * @brief Use user_input to search throught the DB instruction list
- *
- * @param user_input String that holds the user input
- * @return InstructionEnum
- */
 InstructionEnum getInstruction(const char *user_input){
     for (int i = 0; i < MAX_INSTRUCTION; i++) {
             if (strcmp(user_input, DB_INSTRUCTION[i]) == 0) {
@@ -54,13 +37,7 @@ InstructionEnum getInstruction(const char *user_input){
         return UNKNOWN_COMMAND;
 }
 
-/**
- * @brief Handle the Open Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
+
 void openInstruction(char *user_input[], KeyValueNode **head) {
     
     char cwd[1024];
@@ -86,14 +63,7 @@ void openInstruction(char *user_input[], KeyValueNode **head) {
     }
 }
 
-/**
- * @brief Handle the Show All Instruction
- *
- * @param user_input String that holds the user input
- * @param counter length of user_input
- * @param head  node pointing to the head
- * @return void
- */
+
 void showAllInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
     if (counter >= 2 && strcmp(user_input[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(user_input[1], DB_INSTRUCTION[ALL]) == 0)
@@ -104,12 +74,7 @@ void showAllInstruction(char *user_input[], int counter, KeyValueNode **head) {
 }
 
 
-/**
- * @brief Handle the Exit Instruction
- *
- * @param user_input String that holds the user input
- * @return void
- */
+
 void exitInstruction(char *user_input[]) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[EXIT]) == 0) // DELETE INSTRUCTION
@@ -119,30 +84,15 @@ void exitInstruction(char *user_input[]) {
     }
 }
 
-/**
- * @brief Handle the HELP Instruction
- *
- * @param DBState either db_open or db_close
- * @return void
- */
+
 void helpInstruction(DBState db_state) {
     
     if (db_State == DB_CLOSE) {
-        
-        char cwd[1024];
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            strcat(cwd, "/");
-        }
-        else
-        {
-            perror("getcwd() error");
-        }
-        
+    
         printf("--------------HELP PAGE--------------\n");
         printf("Current State : Database Close\n");
         printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
-        printf("Please place your 'Color.txt' file at the following location: %s\n",cwd);
+        printf("Please place your 'XXX.txt' file at the following location: %s\n",printWorkingDirectory());
         printf("EXIT :  EXIT the EzDB.EXE\n");
 
         
@@ -163,13 +113,7 @@ void helpInstruction(DBState db_state) {
     
 }
 
-/**
- * @brief Handle the Insert Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
+
 void insertInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[INSERT]) == 0) {
@@ -190,13 +134,7 @@ void insertInstruction(char *user_input[], KeyValueNode **head) {
     
 }
 
-/**
- * @brief Handle the Query Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
+
 void queryInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
@@ -216,13 +154,7 @@ void queryInstruction(char *user_input[], KeyValueNode **head) {
     
 }
 
-/**
- * @brief Handle the Update Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
+
 void updateInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[UPDATE]) == 0)
@@ -244,13 +176,6 @@ void updateInstruction(char *user_input[], KeyValueNode **head) {
     
 }
 
-/**
- * @brief Handle the Delete Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
 void deleteInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
@@ -274,32 +199,45 @@ void deleteInstruction(char *user_input[], KeyValueNode **head) {
     
 }
 
-/**
- * @brief Handle the Save Instruction
- *
- * @param user_input String that holds the user input
- * @param head  node pointing to the head
- * @return void
- */
+
+char* getWorkingDirectory(char* user_input){
+    
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    {
+        strcat(cwd, "/");
+        return strcat(cwd, user_input);
+    }
+    else
+    {
+        return "getcwd() error";
+    }
+    
+    
+}
+
+char* printWorkingDirectory(){
+    
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+    {
+        return strcat(cwd, "/");
+    }
+    else
+    {
+        return "Unable to get working directory";
+    }
+    
+    
+}
+
+
 void saveInstruction(char *user_input[], KeyValueNode **head) {
     
     if (strcmp(user_input[0], DB_INSTRUCTION[SAVE]) == 0)
     {
+        saveFromFile(getWorkingDirectory(user_input[1]), head);
         printf("SAVE Data to this file %s\n", user_input[1]);
-        
-        char cwd[1024];
-        if (getcwd(cwd, sizeof(cwd)) != NULL)
-        {
-            strcat(cwd, "/");
-            strcat(cwd, user_input[1]);
-        }
-        else
-        {
-            perror("getcwd() error");
-            // Handle error here
-        }
-        
-        saveFromFile(cwd, head);
     }
     
 }
@@ -460,13 +398,7 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
     return 1;
 }
 
-/**
- * @brief Save Text File into XXX.txt
- *
- * @param filename Take in File Name
- * @param head  node pointing to the head
- * @return int 1 or 0 whether it successed or not
- */
+
 void saveFromFile(const char *filename, KeyValueNode **head)
 {
     KeyValueNode *temporary = *head;

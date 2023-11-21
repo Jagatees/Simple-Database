@@ -12,8 +12,7 @@
 
 int main(int argc, const char *argv[])
 {
-    // Print SIT Declaration
-    SIT_DECLARATION();
+    PRINT_SIT_DECLARATION();
    
     // Init Head node to NULL on Start
     KeyValueNode *head = NULL;

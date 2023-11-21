@@ -12,7 +12,7 @@
 
 const char *characters = " ?\t\n";
 
-void SIT_DECLARATION(void){
+void PRINT_SIT_DECLARATION(void){
     printf("Declaration\n");
     printf("SIT\x27s policy on copying does not allow the students to copy source code as well as assessment solutions\n");
     printf("from another person or other places. It is the students\x27 responsibility to guarantee that their assessment\n");
@@ -35,7 +35,7 @@ void SIT_DECLARATION(void){
     printf("5. 2301821 KHOO YE CHEN\n");
 
     printf("\n");
-    printf("Date: 20 Nov 2023.\n");
+    printf("Date: 22 Nov 2023.\n");
     printf("\n");
 }
 

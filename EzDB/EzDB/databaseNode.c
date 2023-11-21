@@ -1,6 +1,5 @@
 #include "databaseNode.h"
 
-// CREATE A NODE
 KeyValueNode *createNode(char *key, char *value)
 {
     KeyValueNode *result = malloc(sizeof(KeyValueNode));
@@ -9,7 +8,6 @@ KeyValueNode *createNode(char *key, char *value)
     return result;
 }
 
-// INSERT NEW NODE INTO NODE LIST
 KeyValueNode *insertHead(KeyValueNode **head, KeyValueNode *node_to_insert)
 {
     node_to_insert->next = *head;
@@ -19,7 +17,6 @@ KeyValueNode *insertHead(KeyValueNode **head, KeyValueNode *node_to_insert)
 
 
 
-// Show All - (Print)
 void printNode(KeyValueNode *head)
 {
     KeyValueNode *temporary = head;
@@ -47,7 +44,6 @@ int lenNode(KeyValueNode *head)
     return counter;
 }
 
-// Search Query
 int findNode(KeyValueNode *head, char *key)
 {
     KeyValueNode *tmp = head;
@@ -76,13 +72,11 @@ char *findNodereturnString(KeyValueNode *head, char *key)
     return "EMPTY";
 }
 
-// delete node
 void deleteNode(KeyValueNode **head, char *keys)
 {
     KeyValueNode *previous = *head;
     KeyValueNode *current = *head;
 
-    // Check if the head node is the one to be deleted
     if (strcmp(current->key, keys) == 0)
     {
         *head = current->next;
@@ -90,26 +84,22 @@ void deleteNode(KeyValueNode **head, char *keys)
         return;
     }
 
-    // Search for the node to be deleted
     while (current != NULL && strcmp(current->key, keys) != 0)
     {
         previous = current;
         current = current->next;
     }
 
-    // If the key wasn't found in the list
     if (current == NULL)
     {
         printf("Key not found in the list\n");
         return;
     }
 
-    // Delete the node
     previous->next = current->next;
     free(current);
 }
 
-// UPDATE
 int updateNode(KeyValueNode *head, char *key, char *newvalue)
 {
     KeyValueNode *tmp = head;

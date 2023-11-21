@@ -36,5 +36,8 @@ char *rtrim(char *user_input);
 int readFromFile(const char *filename, KeyValueNode **mainHead);
 void saveFromFile(const char *filename, KeyValueNode **head);
 
+char* getWorkingDirectory(char* user_input);
+char* printWorkingDirectory(void);
+
 
 #endif /* database_h */
