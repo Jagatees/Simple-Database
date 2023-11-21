@@ -75,7 +75,7 @@ void openInstruction(char *user_input[], KeyValueNode **head) {
         perror("getcwd() error");
     }
 
-    if (strcmp(user_input[1], "Color.txt") == 0 && readFromFile(cwd, head))
+    if (readFromFile(cwd, head))
     {
         printf("Save Key & Values into cahe from %s\n", user_input[1]);
         switchState(user_input[0]);
@@ -115,7 +115,7 @@ void exitInstruction(char *user_input[]) {
     if (strcmp(user_input[0], DB_INSTRUCTION[EXIT]) == 0) // DELETE INSTRUCTION
     {
         switchState(user_input[0]);
-        printf("Exit Database\n");
+        printf("Exit EzDB.EXE\n");
     }
 }
 
@@ -139,23 +139,25 @@ void helpInstruction(DBState db_state) {
             perror("getcwd() error");
         }
         
-        printf("--------------INSTRUCTION LIST--------------\n");
+        printf("--------------HELP PAGE--------------\n");
+        printf("Current State : Database Close\n");
         printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
         printf("Please place your 'Color.txt' file at the following location: %s\n",cwd);
-        printf("EXIT :  EXIT the program\n");
+        printf("EXIT :  EXIT the EzDB.EXE\n");
 
         
     } else if (db_State == DB_OPEN){
         
-        printf("--------------INSTRUCTION LIST--------------\n");
+        printf("--------------HELP PAGE--------------\n");
+        printf("Current State : Database OPEN\n");
         printf("SHOW ALL: Display all entries in the table.\n");
         printf("INSERT [Key] [Value]: Add a new entry to the table.\n");
         printf("QUERY [Key]: Retrieve the value associated with the specified key.\n");
         printf("UPDATE [Key] [Value]: Modify the value associated with the given key.\n");
         printf("DELETE [Key]: Remove the entry associated with the specified key from the table.\n");
         printf("SAVE [filename.txt]: Save the current table data to a text file.\n");
-        printf("BACK : Goes Back to Previous Page.\n");
-        printf("Exit: Terminate the program.\n");
+        printf("BACK: Transitioning from 'db open' state to 'db close' state.\n");
+        printf("Exit: Terminate the EzDB.EXE.\n");
 
     }
     
