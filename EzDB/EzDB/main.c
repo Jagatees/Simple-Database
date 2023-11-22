@@ -40,7 +40,7 @@ int main(int argc, const char *argv[])
             split_user_input[counter] = strtok(NULL, characters);
         }
 
-        inDatabase = databaseLogic(split_user_input, counter, &head);
+        inDatabase = databaseLogic(split_user_input, counter - 1, &head);
 
     } while (!inDatabase);
 

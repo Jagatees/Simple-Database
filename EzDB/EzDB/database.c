@@ -2,7 +2,6 @@
 
 
 const int MAX_INSTRUCTION = 11;
-const char *INVAILD_INSTRUCTION = "Unknown command. Please type 'HELP' for the list of commands.\n";
 const char *DB_INSTRUCTION[MAX_INSTRUCTION] = {
     "SHOW", "ALL", "INSERT", "QUERY", "UPDATE", "DELETE", "OPEN", "SAVE", "EXIT", "HELP", "BACK",
 };
@@ -24,9 +23,7 @@ void switchState(const char* user_input) {
     } else if (strcmp(user_input, DB_INSTRUCTION[EXIT]) == 0) {
         db_State = DB_CLOSE;
     }
-    
 }
-
 
 InstructionEnum getInstruction(const char *user_input){
     for (int i = 0; i < MAX_INSTRUCTION; i++) {
@@ -37,74 +34,84 @@ InstructionEnum getInstruction(const char *user_input){
         return UNKNOWN_COMMAND;
 }
 
+void PRINT_INVAILD_INSTRUCTION(void) {
+    printf("Unknown command. Please type 'HELP' for the list of commands.\n");
+}
 
-void openInstruction(char *user_input[], KeyValueNode **head) {
 
-    if (readFromFile(getWorkingDirectory(user_input[1]), head))
+void openInstruction(char *user_input[], int counter, KeyValueNode **head) {
+
+    if (counter == 1 && readFromFile(getWorkingDirectory(user_input[1]), head, user_input[1]))
     {
-        printf("Save Key & Values into cahe from %s\n", user_input[1]);
+        printf("Save Key & Values into cache from %s\n", user_input[1]);
         switchState(user_input[0]);
     }
-    else
+    else if (counter != 1)
     {
-        printf("Unable to find %s at location\n", user_input[1]);
+        PRINT_INVAILD_INSTRUCTION();
     }
+    
 }
 
 
 void showAllInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
-    if (counter >= 2 && strcmp(user_input[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(user_input[1], DB_INSTRUCTION[ALL]) == 0)
+    if (counter == 1 && strcmp(user_input[0], DB_INSTRUCTION[SHOW]) == 0 && strcmp(user_input[1], DB_INSTRUCTION[ALL]) == 0)
     {
         printf("There are in total %i records found: \n", lenNode(*head));
         printNode(*head);
+    }else {
+        PRINT_INVAILD_INSTRUCTION();
     }
 }
 
 
 
-void exitInstruction(char *user_input[]) {
-    
-    if (strcmp(user_input[0], DB_INSTRUCTION[EXIT]) == 0) // DELETE INSTRUCTION
+int exitInstruction(char *user_input[], int counter) {
+    if (counter == 0 && strcmp(user_input[0], DB_INSTRUCTION[EXIT]) == 0)
     {
         switchState(user_input[0]);
-        printf("Exit EzDB.EXE\n");
+        printf("EXIT EzDB.EXE\n");
+        return 1;
+    } else {
+        PRINT_INVAILD_INSTRUCTION();
+        return 0;
     }
 }
 
 
-void helpInstruction(DBState db_state) {
+void helpInstruction(DBState db_state, int counter) {
     
-    if (db_State == DB_CLOSE) {
-    
-        printf("--------------HELP PAGE--------------\n");
-        printf("Current State : Database Close\n");
-        printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
-        printf("Please place your 'XXX.txt' file at the following location: %s\n",printWorkingDirectory());
-        printf("EXIT :  EXIT the EzDB.EXE\n");
-
-        
-    } else if (db_State == DB_OPEN){
-        
-        printf("--------------HELP PAGE--------------\n");
-        printf("Current State : Database OPEN\n");
-        printf("SHOW ALL: Display all entries in the table.\n");
-        printf("INSERT [Key] [Value]: Add a new entry to the table.\n");
-        printf("QUERY [Key]: Retrieve the value associated with the specified key.\n");
-        printf("UPDATE [Key] [Value]: Modify the value associated with the given key.\n");
-        printf("DELETE [Key]: Remove the entry associated with the specified key from the table.\n");
-        printf("SAVE [filename.txt]: Save the current table data to a text file.\n");
-        printf("BACK: Transitioning from 'db open' state to 'db close' state.\n");
-        printf("Exit: Terminate the EzDB.EXE.\n");
-
+    if (counter == 0) {
+        if (db_State == DB_CLOSE) {
+            printf("--------------HELP PAGE--------------\n");
+            printf("Current State : Database Close\n");
+            printf("OPEN [filename.txt] : Load data from the specified file into the cache.\n");
+            printf("Please place your 'XXX.txt' file at the following location: %s\n",printWorkingDirectory());
+            printf("EXIT :  EXIT the EzDB.EXE\n");
+        } else if (db_State == DB_OPEN){
+            printf("--------------HELP PAGE--------------\n");
+            printf("Current State : Database OPEN\n");
+            printf("SHOW ALL: Display all entries in the table.\n");
+            printf("INSERT [Key] [Value]: Add a new entry to the table.\n");
+            printf("QUERY [Key]: Retrieve the value associated with the specified key.\n");
+            printf("UPDATE [Key] [Value]: Modify the value associated with the given key.\n");
+            printf("DELETE [Key]: Remove the entry associated with the specified key from the table.\n");
+            printf("SAVE [filename.txt]: Save the current table data to a text file.\n");
+            printf("BACK: Transitioning from 'db open' state to 'db close' state.\n");
+            printf("EXIT: Terminate the EzDB.EXE.\n");
+        }
+    }else {
+        PRINT_INVAILD_INSTRUCTION();
     }
+   
     
 }
 
 
-void insertInstruction(char *user_input[], KeyValueNode **head) {
+void insertInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
-    if (strcmp(user_input[0], DB_INSTRUCTION[INSERT]) == 0) {
+    if (counter == 2 && strcmp(user_input[0], DB_INSTRUCTION[INSERT]) == 0) {
         int isfound = findNode(*head, user_input[1]);
    
         if (isfound == 1)
@@ -117,15 +124,16 @@ void insertInstruction(char *user_input[], KeyValueNode **head) {
             insertHead(head, tmp);
             printf("A new record of Key=%s Value=%s is successfully inserted\n", user_input[1], user_input[2]);
         }
-   
+    }else  {
+        PRINT_INVAILD_INSTRUCTION();
     }
     
 }
 
 
-void queryInstruction(char *user_input[], KeyValueNode **head) {
+void queryInstruction(char *user_input[], int counter,KeyValueNode **head) {
     
-    if (strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
+    if (counter == 1 &&strcmp(user_input[0], DB_INSTRUCTION[QUERY]) == 0)
     {
         char *isfound = findNodeKey(*head, user_input[1]);
    
@@ -138,14 +146,16 @@ void queryInstruction(char *user_input[], KeyValueNode **head) {
             printf("There is no record with Key=%s found in the database\n", user_input[1]);
         }
    
+    }else  {
+        PRINT_INVAILD_INSTRUCTION();
     }
     
 }
 
 
-void updateInstruction(char *user_input[], KeyValueNode **head) {
+void updateInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
-    if (strcmp(user_input[0], DB_INSTRUCTION[UPDATE]) == 0)
+    if (counter == 2 && strcmp(user_input[0], DB_INSTRUCTION[UPDATE]) == 0)
     {
    
         int isfound = findNode(*head, user_input[1]);
@@ -160,13 +170,15 @@ void updateInstruction(char *user_input[], KeyValueNode **head) {
             printf("There is no record with Key=%s found in the database.\n", user_input[1]);
         }
    
+    }else  {
+        PRINT_INVAILD_INSTRUCTION();
     }
     
 }
 
-void deleteInstruction(char *user_input[], KeyValueNode **head) {
+void deleteInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
-    if (strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
+    if (counter == 1 && strcmp(user_input[0], DB_INSTRUCTION[DELETE]) == 0)
     {
         
         int isfound = findNode(*head, user_input[1]);
@@ -183,6 +195,8 @@ void deleteInstruction(char *user_input[], KeyValueNode **head) {
         
         
        
+    }else  {
+        PRINT_INVAILD_INSTRUCTION();
     }
     
 }
@@ -215,17 +229,17 @@ char* printWorkingDirectory(void){
     {
         return "Unable to get working directory";
     }
-    
-    
 }
 
 
-void saveInstruction(char *user_input[], KeyValueNode **head) {
+void saveInstruction(char *user_input[], int counter, KeyValueNode **head) {
     
-    if (strcmp(user_input[0], DB_INSTRUCTION[SAVE]) == 0)
+    if (counter == 1 && strcmp(user_input[0], DB_INSTRUCTION[SAVE]) == 0)
     {
         saveFromFile(getWorkingDirectory(user_input[1]), head);
         printf("SAVE Data to this file %s\n", user_input[1]);
+    } else {
+        PRINT_INVAILD_INSTRUCTION();
     }
     
 }
@@ -245,14 +259,13 @@ int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
     switch (db_State) {
         case DB_CLOSE:
             if (instructionType == OPEN) {
-                openInstruction(user_input, head);
+                openInstruction(user_input, counter, head);
             } else if (instructionType == HELP) {
-                helpInstruction(db_State);
+                helpInstruction(db_State, counter);
             } else if (instructionType == EXIT) {
-                exitInstruction(user_input);
-                return 1;
+                return exitInstruction(user_input, counter);
             } else {
-                printf(INVAILD_INSTRUCTION);
+                PRINT_INVAILD_INSTRUCTION();
             }
             break;
         case DB_OPEN:
@@ -261,32 +274,31 @@ int databaseLogic(char *user_input[], int counter, KeyValueNode **head)
                     showAllInstruction(user_input, counter, head);
                     break;
                 case EXIT:
-                    exitInstruction(user_input);
-                    return 1;
+                    return exitInstruction(user_input, counter);
                     break;
                 case INSERT:
-                    insertInstruction(user_input, head);
+                    insertInstruction(user_input, counter, head);
                     break;
                 case QUERY:
-                    queryInstruction(user_input, head);
+                    queryInstruction(user_input, counter, head);
                     break;
                 case HELP:
-                    helpInstruction(db_State);
+                    helpInstruction(db_State, counter);
                     break;
                 case UPDATE:
-                    updateInstruction(user_input, head);
+                    updateInstruction(user_input, counter, head);
                     break;
                 case DELETE:
-                    deleteInstruction(user_input, head);
+                    deleteInstruction(user_input, counter, head);
                     break;
                 case SAVE:
-                    saveInstruction(user_input, head);
+                    saveInstruction(user_input, counter, head);
                     break;
                 case BACK:
                     db_State = DB_CLOSE;
                     break;
                 default:
-                    printf(INVAILD_INSTRUCTION);
+                    PRINT_INVAILD_INSTRUCTION();
                     break;
             }
             break;
@@ -309,7 +321,7 @@ char *removeSpace(char *user_input)
     return user_input;
 }
 
-int readFromFile(const char *filename, KeyValueNode **mainHead)
+int readFromFile(const char *filename, KeyValueNode **mainHead, char *user_input)
 {
 
     FILE *file = fopen(filename, "r");
@@ -328,7 +340,7 @@ int readFromFile(const char *filename, KeyValueNode **mainHead)
 
     if (!file)
     {
-        printf("Unable to Open File : Use HELP Instruction\n");
+        printf("Unable to Open File Name : %s\n", user_input);
         return 0;
     }
 

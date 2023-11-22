@@ -35,9 +35,9 @@ Silver #C0C0C0
 Gold #FFD700
 Magenta #FF00FF
 Cyan #00FFFF
-Gray #808080
-White #FFFFFF
-Black #000000
+Gray #8#80
+White #FF$FF
+Black #000%00
 Brown #A52A2A
 Pink #FFC0CB
 Purple #800080

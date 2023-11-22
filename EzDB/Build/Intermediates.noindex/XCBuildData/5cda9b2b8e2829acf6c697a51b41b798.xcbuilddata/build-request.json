@@ -47,6 +47,7 @@
       }
     }
   },
+  "qos" : "default",
   "schemeCommand" : "launch",
   "showNonLoggedProgress" : true,
   "useDryRun" : false,
