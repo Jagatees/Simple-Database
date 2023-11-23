@@ -1,9 +1,4 @@
-# Linked List Database
-
-
-# Description
-
-## Featuers 
+# Color Linked List Database
 
 
 ## Credits
