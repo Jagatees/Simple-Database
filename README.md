@@ -1,4 +1,4 @@
-# Color Linked List Database
+# Simple C Linked List Database
 
 
 ## Credits
