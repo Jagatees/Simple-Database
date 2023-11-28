@@ -15,6 +15,16 @@ To compile the project, use a C compiler. For example:
 gcc main.c database.c databaseNode.c -o linked-list-database
 ```
 
+### Locate & Run exe
+
+```
+cd EzDB/Build/Products/Release/EzDB
+```
+
+```
+./EzDB
+```
+
 ## User Commands
 
 - **SHOW ALL:** Display all records in the database.
